@@ -1,15 +1,15 @@
-import "./globals.css";
-import type { Metadata } from "next";
+import './globals.css';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Crochet Chaos | Stitch Spark",
-  description: "A colorful crochet project planner and pattern tracker.",
+  title: 'Crochet Chaos | The Ultimate Crochet Bible',
+  description: 'Crochet patterns, project tracking, calculators, and an evolving crochet encyclopedia.',
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly = { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
+    html lang="en"
+      {children}
+    /html
   );
 }

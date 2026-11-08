@@ -6,9 +6,9 @@ export const metadata: Metadata = {
   description: 'Crochet patterns, project tracking, calculators, and an evolving crochet encyclopedia.',
 };
 
-export default function RootLayout({ children }: Readonly = { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    html lang="en"
+    html lang="en">
       {children}
     /html
   );

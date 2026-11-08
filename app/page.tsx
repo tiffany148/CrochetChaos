@@ -1,11 +1,12 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import Encyclopedia from "./encyclopedia";
 
 type Step = { id: string; text: string; done: boolean };
 type Pattern = { id: string; title: string; source: string; steps: Step[]; current: number; notes: string };
 type Product = { id: string; name: string; category: string; price: number; description: string; url?: string };
-type Tab = "patterns" | "tracker" | "calculators" | "shop";
+type Tab = "patterns" | "tracker" | "calculators" | "shop" | "encyclopedia";
 const STORAGE_KEY = "crochet-chaos-v2";
 
 export default function Home() {
@@ -99,7 +100,7 @@ export default function Home() {
       <header className="topbar">
         <a className="brand" href="#home">🧶 Crochet <b>Chaos</b></a>
         <nav className="nav" aria-label="Main navigation">
-          {(["patterns", "tracker", "calculators", "shop"] as const).map((item) => <button key={item} className={tab === item ? "nav-item selected" : "nav-item"} onClick={() => setTab(item)}>{item === "patterns" ? "📚 Patterns" : item === "tracker" ? "🧵 Tracker" : item === "calculators" ? "✨ Calculators" : "🛍️ Shop"}</button>)}
+          {(["patterns", "tracker", "calculators", "encyclopedia", "shop"] as const).map((item) => <button key={item} className={tab === item ? "nav-item selected" : "nav-item"} onClick={() => setTab(item)}>{item === "patterns" ? "📚 Patterns" : item === "tracker" ? "🧵 Tracker" : item === "calculators" ? "✨ Calculators" : item === "encyclopedia" ? "📖 Bible" : "🛍️ Shop"}</button>)}
         </nav>
         <button className="theme" onClick={() => setTheme(theme === "light" ? "dark" : "light")}>{theme === "light" ? "🌙 Dark" : "☀️ Light"}</button>
       </header>
@@ -141,6 +142,8 @@ export default function Home() {
           </section>
           <section className="panel"><p className="eyebrow">SWATCH-BASED PLANNING</p><h2>Yarn estimate</h2><p className="muted">Approximation for a rectangular project using a similar stitch pattern; includes about 10% extra.</p><div className="form-grid two"><label>Swatch size<input value="10 × 10 cm" readOnly /></label><label>Yarn used for swatch (meters)<input type="number" min="0" step="0.1" value={swatchMeters} onChange={(e) => setSwatchMeters(Number(e.target.value))} /></label></div><div className="results"><p><strong>About {yarnMeters} m</strong><span>estimated yarn, including extra</span></p></div></section>
         </>}
+
+        {tab === "encyclopedia" && <Encyclopedia />}
 
         {tab === "shop" && <section className="panel"><p className="eyebrow">MAKER FINDS</p><h2>Tools and supplies</h2><p className="muted">Sample listings for planning only; this is not a real shop or checkout.</p><div className="product-grid">{products.map((product) => <article className="product-card" key={product.id}><span className="tag">{product.category}</span><h3>{product.name}</h3><p>{product.description}</p><strong>${product.price.toFixed(2)}</strong></article>)}</div></section>}
 

@@ -1,6 +1,12 @@
 # Crochet Chaos
 
-A mobile-friendly crochet planning starter built with Next.js. Features include a pattern shelf, row/round checklist tracker, project notes, gauge-based stitch and row estimates, yarn estimate, and light/dark mode.
+A mobile-friendly crochet planning app built with Next.js. The starter includes pattern notes and a checklist tracker, local browser saving, stitch/row and yarn estimates, a sample supplies catalog, light/dark mode, and an optional server-side OpenAI helper.
+
+## Deploy on Vercel
+
+1. Import `tiffany148/CrochetChaos` into Vercel and deploy the `main` branch.
+2. The app builds without an OpenAI key; the helper will report that it is unconfigured until a key is set.
+3. To enable the helper, add `OPENAI_API_KEY` under Vercel **Project Settings → Environment Variables** for the environments you use, then redeploy. Never commit the secret to GitHub or expose it in a `NEXT_PUBLIC_` variable. OpenAI API billing is separate from ChatGPT subscriptions.
 
 ## Run locally
 
@@ -13,13 +19,9 @@ npm run dev
 
 Open http://localhost:3000.
 
-## Current limitations
+## Limitations
 
-- Pattern and project data is saved in this browser only; there are no accounts or cloud sync yet.
-- Pattern instructions are split into checklist lines, not verified or fully interpreted. Review them against the original pattern.
-- AI, PDF/OCR import, Supabase cloud storage, and payment checkout are not included in this initial version.
-- Calculator outputs are estimates; gauge, shaping, construction, stitch multiples, and the pattern’s turning-chain rules matter.
-
-## Use with GitHub Mobile
-
-GitHub Mobile can view the files and review pull requests, but it does not run a Next.js development server. To preview the site, use a computer or a cloud development/deployment environment such as GitHub Codespaces or Vercel.
+- Pattern data is stored in this browser only. There are no accounts or cloud sync, so browser data is not shared across devices.
+- Pattern lines become simple checklist items; the app does not verify crochet instructions.
+- The shop is a sample catalog only; it has no inventory, outbound retailer links, cart, or payment processing.
+- Calculators provide rough estimates; gauge, shaping, construction, stitch multiples, and the pattern's turning-chain rules affect actual results.

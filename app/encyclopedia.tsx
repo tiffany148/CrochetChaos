@@ -1,30 +1,31 @@
 "use client";
+import { useEffect, useMemo, useState } from "react";
+import { lessons } from "../lib/encyclopedia-lessons";
 
-import { useMemo, useState } from "react";
-
-type Lesson = { id: string; category: string; title: string; level: string; summary: string; steps: string[]; tip: string };
-
-const lessons: Lesson[] = [
-  { id: "magic-ring", category: "Foundations", title: "Magic ring without the struggle", level: "Beginner", summary: "Start amigurumi and circular motifs with an adjustable center.", steps: ["Make a loop with the working yarn, leaving a tail.", "Insert your hook through the loop, pull up a loop, and chain to secure.", "Work the required stitches around the loop and tail, then gently pull the tail to close."], tip: "With fuzzy or chunky yarn, lay a smooth, thinner strand alongside the tail as a temporary pull cord. Pull gently to close, then remove it; test first so fibers do not snag." },
-  { id: "frogging", category: "Fixes & troubleshooting", title: "Undo stitches without unraveling everything", level: "All levels", summary: "Frogging means pulling out stitches. Stop exactly where the mistake begins.", steps: ["Photograph or note your current row and stitch count.", "Insert a contrasting yarn lifeline through the stitches in the row you want to keep, if accessible.", "Unravel slowly to that row, then place the live loops back on your hook or stabilize them before continuing."], tip: "For textured or fuzzy yarn, undo one stitch at a time rather than yanking. Never cut a snagged strand without identifying which yarn it is." },
-  { id: "gauge", category: "Sizing & fit", title: "Gauge: the secret to sizing", level: "Beginner", summary: "Your stitches and rows per measured distance determine finished dimensions.", steps: ["Crochet a swatch larger than 10 × 10 cm using the planned stitch and yarn.", "Wash and dry it as the finished item will be cared for.", "Count stitches and rows across a central 10 cm area; compare with the pattern."], tip: "A different hook size can change stitch gauge, but row gauge may still differ. Measure both before making garments." },
-  { id: "dog-sweater", category: "Sizing & fit", title: "Measure a dog for a sweater", level: "All levels", summary: "Use the dog's measurements, not just a breed-based size label.", steps: ["Measure neck circumference where the collar sits.", "Measure chest girth around the widest part behind the front legs.", "Measure back length from the base of the neck to the desired hem, and note front-leg spacing."], tip: "Allow comfortable ease and room for movement. Keep the underside short enough for toileting, and test the fit frequently." },
-  { id: "seaming", category: "Garments & joining", title: "Join crochet panels neatly", level: "Intermediate", summary: "Choose a seam that balances appearance, stretch, and strength.", steps: ["Block panels to their intended measurements before joining.", "Pin or clip matching edges and align important points such as shoulders and underarms.", "Use mattress stitch for an unobtrusive seam or slip-stitch joins for a visible ridge; check stretch before fastening off."], tip: "Use stitch markers to divide long seams into equal sections so one side doesn't bunch up." },
-  { id: "increases", category: "Stitches & techniques", title: "Increases and decreases", level: "Beginner", summary: "Shape fabric by changing the number of stitches in a row or round.", steps: ["Increase by working two stitches into one stitch where the pattern specifies.", "Decrease by combining two or more stitches into one using the technique required for your stitch.", "Count after shaping rows and place markers at repeat boundaries."], tip: "For amigurumi, invisible single-crochet decreases often look smoother on the right side than standard decreases." },
-  { id: "yarn-substitution", category: "Yarn & tools", title: "Substitute yarn with confidence", level: "All levels", summary: "Match fabric behavior, not only the yarn weight printed on the label.", steps: ["Compare recommended gauge, fiber, construction, and care instructions.", "Make a swatch with the intended hook size and stitch pattern.", "Check drape, stretch, feel, and total yardage before buying enough for the project."], tip: "Two yarns labeled the same weight can produce very different garments; always swatch when fit matters." },
-  { id: "lifeline", category: "Fixes & troubleshooting", title: "Add a safety lifeline", level: "Intermediate", summary: "A removable contrasting thread helps protect a completed row during corrections.", steps: ["Thread a smooth contrasting yarn onto a blunt tapestry needle.", "Pass it through the stitches of a completed row without splitting working yarn.", "Leave ends hanging free; when necessary, unravel only as far as the protected row."], tip: "Test the technique on a swatch first: crochet loops and textured stitches can be harder to protect than knitted stitches." },
-];
-
+type View = "all" | "saved" | "completed";
+const KEY = "crochet-chaos-bible-v2";
 export default function Encyclopedia() {
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("All topics");
-  const [openId, setOpenId] = useState<string | null>(null);
-  const categories = ["All topics", ...Array.from(new Set(lessons.map((lesson) => lesson.category)))];
-  const results = useMemo(() => lessons.filter((lesson) => (category === "All topics" || lesson.category === category) && `${lesson.title} ${lesson.summary} ${lesson.tip} ${lesson.category}`.toLowerCase().includes(search.toLowerCase().trim())), [category, search]);
-  return <section className="panel encyclopedia"><p className="eyebrow">THE CROCHET CHAOS LIBRARY</p><h2>The Ultimate Crochet Bible</h2><p className="muted">Searchable lessons, rescue tricks, and fitting tips. This is the first installment; more chapters and diagrams are coming.</p>
-    <div className="encyclopedia-filters"><label>Search lessons<input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Try magic ring, dog sweater, gauge…" /></label><label>Topic<select value={category} onChange={(event) => setCategory(event.target.value)}>{categories.map((item) => <option key={item}>{item}</option>)}</select></label></div>
-    <p className="muted" aria-live="polite">{results.length} {results.length === 1 ? "lesson" : "lessons"} found</p>
-    <div className="encyclopedia-list">{results.map((lesson) => <article className="encyclopedia-card" key={lesson.id}><button className="encyclopedia-toggle" aria-expanded={openId === lesson.id} onClick={() => setOpenId(openId === lesson.id ? null : lesson.id)}><span><small>{lesson.category} · {lesson.level}</small><strong>{lesson.title}</strong><span>{lesson.summary}</span></span><b aria-hidden="true">{openId === lesson.id ? "−" : "+"}</b></button>{openId === lesson.id && <div className="encyclopedia-detail"><ol>{lesson.steps.map((step) => <li key={step}>{step}</li>)}</ol><p><strong>Wish-I'd-known tip:</strong> {lesson.tip}</p></div>}</article>)}</div>
-    {!results.length && <p>No lessons matched. Try another keyword or topic.</p>}
-  </section>;
+ const [search,setSearch] = useState("");
+ const [category,setCategory] = useState("All topics");
+ const [level,setLevel] = useState("All levels");
+ const [view,setView] = useState<View>("all");
+ const [openId,setOpenId] = useState<string|null>(null);
+ const [saved,setSaved] = useState<string[]>([]);
+ const [completed,setCompleted] = useState<string[]>([]);
+ const [ready,setReady] = useState(false);
+ useEffect(()=>{try { const data=JSON.parse(localStorage.getItem(KEY)||"{}"); if(Array.isArray(data.saved)) setSaved(data.saved); if(Array.isArray(data.completed)) setCompleted(data.completed); } catch {} setReady(true);},[]);
+ useEffect(()=>{if(ready) {try{localStorage.setItem(KEY,JSON.stringify({saved,completed}));}catch{}}},[saved,completed,ready]);
+ const categories = useMemo(()=>["All topics",...Array.from(new Set(lessons.map(l=>l.category)))],[]);
+ const results = useMemo(()=>lessons.filter(l=> (category==="All topics"||l.category===category) && (level==="All levels"||l.level===level||l.level==="All levels") && (view!=="saved"||saved.includes(l.id)) && (view!=="completed"||completed.includes(l.id)) && [l.title,l.summary,l.tip,l.category,...l.steps].join(" ").toLowerCase().includes(search.toLowerCase().trim())),[search,category,level,view,saved,completed]);
+ const toggle=(id:string,items:string[],set:(x:string[])=>void)=>set(items.includes(id)?items.filter(x=>x!==id):[...items,id]);
+ return <section className="panel encyclopedia">
+ <p className="eyebrow">THE CROCHET CHAOS LIBRARY</p><h2>The Ultimate Crochet Bible</h2>
+ <p className="muted">Practical lessons, rescue tricks, garment fitting, and the little details patterns forget to tell you.</p>
+ <div className="bible-progress"><strong>{completed.length} of {lessons.length} lessons completed</strong><div className="bible-progress-track" role="progressbar" aria-label="Lessons completed" aria-valuenow={completed.length} aria-valuemin={0} aria-valuemax={lessons.length}><span style={{width:`${100*completed.length/lessons.length}%`}}/></div><small>Saved lessons and progress stay on this device.</small></div>
+ <div className="encyclopedia-filters"><label>Search lessons<input type="search" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Try magic ring, frogging, dog sweaters…" /></label><label>Topic<select value={category} onChange={e=>setCategory(e.target.value)}>{categories.map(c=><option key={c}>{c}</option>)}</select></label><label>Difficulty<select value={level} onChange={e=>setLevel(e.target.value)}>{["All levels","Beginner","Intermediate"].map(x=><option key={x}>{x}</option>)}</select></label></div>
+ <div className="bible-view-tabs" aria-label="Lesson view">{(["all","saved","completed"] as View[]).map(v=><button key={v} className={view===v?"active":""} aria-pressed={view===v} onClick={()=>setView(v)}>{v==="all"?"All lessons":v==="saved"?`Bookmarked (${saved.length})`:`Completed (${completed.length})`}</button>)}</div>
+ <p className="muted" aria-live="polite">{results.length} {results.length===1?"lesson":"lessons"} found</p>
+ <div className="encyclopedia-list">{results.map(l=><article className="encyclopedia-card" key={l.id}><button className="encyclopedia-toggle" aria-expanded={openId===l.id} onClick={()=>setOpenId(openId===l.id?null:l.id)}><span><small>{l.category} · {l.level}{completed.includes(l.id)?" · ✓ Completed":""}</small><strong>{l.title}</strong><span>{l.summary}</span></span><b aria-hidden="true">{openId===l.id?"−":"+"}</b></button>{openId===l.id&&<div className="encyclopedia-detail"><ol>{l.steps.map(s=><li key={s}>{s}</li>)}</ol><p><strong>Wish I'd known:</strong> {l.tip}</p><div className="bible-actions"><button type="button" aria-pressed={saved.includes(l.id)} onClick={()=>toggle(l.id,saved,setSaved)}>{saved.includes(l.id)?"★ Bookmarked":"☆ Bookmark"}</button><button type="button" aria-pressed={completed.includes(l.id)} onClick={()=>toggle(l.id,completed,setCompleted)}>{completed.includes(l.id)?"✓ Completed":"Mark complete"}</button></div></div>}</article>)}</div>
+ {!results.length&&<p>No lessons matched. Try clearing the search or changing filters.</p>}
+ </section>;
 }

@@ -2,12 +2,11 @@
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import Encyclopedia from "./encyclopedia";
+import { loadWorkspace, serializeWorkspace, STORAGE_KEY_V1, STORAGE_KEY_V2 } from "../lib/storage";
+import type { Pattern } from "../lib/types";
 
-type Step = { id: string; text: string; done: boolean };
-type Pattern = { id: string; title: string; source: string; steps: Step[]; current: number; notes: string };
 type Product = { id: string; name: string; category: string; price: number; description: string; url?: string };
 type Tab = "patterns" | "tracker" | "calculators" | "shop" | "encyclopedia";
-const STORAGE_KEY = "crochet-chaos-v2";
 
 export default function Home() {
   const [tab, setTab] = useState<Tab>("patterns");
@@ -32,13 +31,10 @@ export default function Home() {
 
   useEffect(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        const data = JSON.parse(saved);
-        if (Array.isArray(data.patterns)) setPatterns(data.patterns);
-        if (typeof data.activeId === "string") setActiveId(data.activeId);
-        if (data.theme === "light" || data.theme === "dark") setTheme(data.theme);
-      }
+      const workspace = loadWorkspace(localStorage.getItem(STORAGE_KEY_V2), localStorage.getItem(STORAGE_KEY_V1));
+      setPatterns(workspace.patterns);
+      setActiveId(workspace.activeId);
+      setTheme(workspace.theme);
     } catch { /* Start with an empty shelf if browser data is invalid. */ }
     setReady(true);
     fetch("/api/products").then((response) => response.ok ? response.json() : []).then((data) => {
@@ -48,7 +44,10 @@ export default function Home() {
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
-    if (ready) localStorage.setItem(STORAGE_KEY, JSON.stringify({ patterns, activeId, theme }));
+    if (!ready) return;
+    try {
+      localStorage.setItem(STORAGE_KEY_V2, serializeWorkspace({ patterns, activeId, theme }));
+    } catch { /* Keep the session usable if browser storage is unavailable. */ }
   }, [patterns, activeId, theme, ready]);
 
   const active = useMemo(() => patterns.find((pattern) => pattern.id === activeId), [patterns, activeId]);

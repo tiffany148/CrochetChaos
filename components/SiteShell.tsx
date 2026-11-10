@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { MotifRow, SparkleField } from "./Decor";
 import { ThemeProvider, useTheme } from "./ThemeProvider";
 
 const LINKS = [
@@ -19,6 +20,7 @@ function Shell({ children }: { children: React.ReactNode }) {
   const { theme, toggleTheme } = useTheme();
   return (
     <>
+      <SparkleField />
       <a className="skip" href="#content">Skip to content</a>
       <header className="site-header">
         <Link className="brand" href="/">Crochet <span>Chaos</span></Link>
@@ -36,7 +38,10 @@ function Shell({ children }: { children: React.ReactNode }) {
           </button>
         </nav>
       </header>
-      <main id="content" className="page">{children}</main>
+      <main id="content" className="page">
+        <MotifRow />
+        {children}
+      </main>
       <footer className="site-footer">Crochet Chaos · a companion for The Ultimate Crochet Bible by Tiffany Brooke</footer>
     </>
   );

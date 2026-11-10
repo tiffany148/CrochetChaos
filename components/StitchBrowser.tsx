@@ -49,12 +49,16 @@ export function StitchBrowser() {
       <p aria-live="polite"><strong>{results.length}</strong> {results.length === 1 ? "stitch" : "stitches"}</p>
       <div className="stitch-grid">
         {results.map((stitch) => (
-          <Link className="stitch-card" key={stitch.slug} href={`/stitches/${stitch.slug}`}>
-            <small>{stitch.level}</small>
-            <small>{stitch.cat}</small>
-            <h2>{stitch.name}</h2>
-            <p><strong>US</strong> {stitch.us} · <strong>UK</strong> {stitch.uk}</p>
-            <p className="muted">{stitch.use}</p>
+          <Link className="stitch-card" data-cat={stitch.cat} data-level={stitch.level} key={stitch.slug} href={`/stitches/${stitch.slug}`}>
+            <div className="card-banner">
+              <span className="pill" data-level={stitch.level}>{stitch.level}</span>
+              <span className="pill" data-cat={stitch.cat}>{stitch.cat}</span>
+              <h2>{stitch.name}</h2>
+            </div>
+            <div className="card-body">
+              <p><strong>US</strong> {stitch.us} · <strong>UK</strong> {stitch.uk}</p>
+              <p className="muted">{stitch.use}</p>
+            </div>
           </Link>
         ))}
       </div>

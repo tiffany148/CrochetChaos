@@ -24,13 +24,13 @@ export default function StitchPage({ params }: PageProps) {
   const related = relatedStitches(stitch);
 
   return (
-    <article className="detail">
+    <article className="detail" data-cat={stitch.cat} data-level={stitch.level}>
       <p className="eyebrow">{stitch.cat} · {stitch.level}</p>
       <h1>{stitch.name}</h1>
       <div className="meta-row">
-        <span className="pill">US {stitch.us}</span>
-        <span className="pill">UK {stitch.uk}</span>
-        <span className="pill">Chart symbol {stitch.sym}</span>
+        <span className="pill" data-level={stitch.level}>US {stitch.us}</span>
+        <span className="pill" data-cat={stitch.cat}>UK {stitch.uk}</span>
+        <span className="pill" data-level={stitch.level}>Chart symbol {stitch.sym}</span>
       </div>
       <p className="lede">{stitch.use}</p>
 
@@ -58,9 +58,14 @@ export default function StitchPage({ params }: PageProps) {
           <h2>More {stitch.cat} stitches</h2>
           <div className="stitch-grid">
             {related.map((item) => (
-              <Link className="stitch-card" key={item.slug} href={`/stitches/${item.slug}`}>
-                <h3>{item.name}</h3>
-                <p className="muted">US {item.us} · UK {item.uk}</p>
+              <Link className="stitch-card" data-cat={item.cat} data-level={item.level} key={item.slug} href={`/stitches/${item.slug}`}>
+                <div className="card-banner">
+                  <span className="pill" data-level={item.level}>{item.level}</span>
+                  <h2>{item.name}</h2>
+                </div>
+                <div className="card-body">
+                  <p className="muted">US {item.us} · UK {item.uk}</p>
+                </div>
               </Link>
             ))}
           </div>

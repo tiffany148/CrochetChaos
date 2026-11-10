@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MotifRow } from "../components/Decor";
 import { getStitch, stitches } from "../lib/stitches";
 
 const featuredSlugs = ["chain", "slip-stitch", "single-crochet", "half-double-crochet", "double-crochet", "treble-crochet"];
@@ -32,6 +33,7 @@ export default function HomePage() {
           </div>
         </div>
         <div className="hero-card">
+          <MotifRow />
           <strong>{stitches.length}</strong>
           <span>stitch entries, each with how to make it, what it is for, and the mistake that usually causes trouble.</span>
         </div>
@@ -58,11 +60,16 @@ export default function HomePage() {
       <h2 className="section-title">Start with the six stitches almost every pattern uses</h2>
       <div className="stitch-grid">
         {featured.map((stitch) => (
-          <Link className="stitch-card" key={stitch.slug} href={`/stitches/${stitch.slug}`}>
-            <small>{stitch.level}</small>
-            <h3>{stitch.name}</h3>
-            <p><strong>US</strong> {stitch.us} · <strong>UK</strong> {stitch.uk}</p>
-            <p className="muted">{stitch.use}</p>
+          <Link className="stitch-card" data-cat={stitch.cat} data-level={stitch.level} key={stitch.slug} href={`/stitches/${stitch.slug}`}>
+            <div className="card-banner">
+              <span className="pill" data-level={stitch.level}>{stitch.level}</span>
+              <span className="pill" data-cat={stitch.cat}>{stitch.cat}</span>
+              <h2>{stitch.name}</h2>
+            </div>
+            <div className="card-body">
+              <p><strong>US</strong> {stitch.us} · <strong>UK</strong> {stitch.uk}</p>
+              <p className="muted">{stitch.use}</p>
+            </div>
           </Link>
         ))}
       </div>

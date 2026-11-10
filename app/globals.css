@@ -95,9 +95,42 @@ html[data-theme="dark"] .card h2 {
   animation: twinkle 2.6s ease-in-out infinite;
   filter: drop-shadow(0 0 6px #ff2d8a) drop-shadow(0 0 8px #3ef0df);
 }
-.motif-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem; margin: 0 0 0.6rem; }
-.motif { width: 64px; height: 64px; filter: drop-shadow(0 0 8px rgb(255 45 138 / 70%)); }
-.hero-card .motif { width: 52px; height: 52px; }
+.hero { position: relative; }
+.hero-aside {
+  position: relative;
+  min-height: 460px;
+  display: flex;
+  align-items: flex-end;
+  border-radius: 28px;
+  overflow: hidden;
+  border: 2px solid rgb(255 45 138 / 70%);
+  box-shadow: var(--glow);
+}
+.hero-aside .craft-frame { position: absolute; inset: 0; }
+.hero-aside-img { object-position: right center !important; }
+.hero-aside::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgb(18 6 32 / 88%) 0%, rgb(18 6 32 / 35%) 46%, rgb(18 6 32 / 8%) 100%);
+}
+.section-divider {
+  position: relative;
+  height: 148px;
+  margin: 1.4rem 0;
+  border-radius: 28px;
+  overflow: hidden;
+  border: 2px solid rgb(62 240 223 / 45%);
+  box-shadow: 0 0 22px rgb(255 45 138 / 35%);
+}
+.section-divider .craft-frame { position: absolute; inset: 0; }
+.divider-img { object-position: center center !important; }
+.with-portrait { display: flex; align-items: center; gap: 1rem; }
+.portrait, .portrait-sm, .portrait-feature { border-radius: 22px; object-fit: cover; box-shadow: 0 0 18px rgb(255 45 138 / 45%); }
+.portrait { width: 140px; height: 140px; }
+.portrait-sm { width: 112px; height: 112px; }
+.portrait-feature { width: min(100%, 280px); height: auto; margin: 0 auto 0.8rem; }
 
 .skip {
   position: absolute;
@@ -166,18 +199,23 @@ html[data-theme="dark"] .card h2 {
 .lede { font-size: 1.3rem; max-width: 40rem; color: var(--muted); }
 .hero-actions, .button-row { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.2rem; }
 .hero-card {
-  min-height: 240px;
-  border-radius: 28px;
-  padding: 1.2rem;
-  background: linear-gradient(160deg, #ff2d8a, #7c3aed 55%, #08756e);
+  position: relative;
+  z-index: 1;
+  width: calc(100% - 2rem);
+  margin: 1rem;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 0.9rem;
+  align-items: center;
+  border-radius: 24px;
+  padding: 0.8rem;
+  background: rgb(18 6 32 / 82%);
   color: #fff8ef;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
   border: 2px solid #d6f25c;
   box-shadow: 0 0 24px rgb(214 242 92 / 55%), 0 0 40px rgb(255 45 138 / 45%);
 }
 .hero-card strong {
+  display: block;
   font-size: 4rem;
   background: none;
   color: var(--lime);
@@ -404,7 +442,9 @@ caption { text-align: left; padding: 0.8rem; font-weight: 800; }
   .hero, .card-grid, .filters, .calc-layout, .form-grid, .encyclopedia-filters { grid-template-columns: 1fr; }
   .site-header { flex-wrap: wrap; align-items: flex-start; }
   .site-nav { width: 100%; justify-content: flex-start; }
-  .heading-row, .tracker-head, .pattern-card { align-items: flex-start; flex-direction: column; }
+  .heading-row, .tracker-head, .pattern-card, .with-portrait { align-items: flex-start; flex-direction: column; }
+  .hero-aside { min-height: 340px; }
+  .hero-card { grid-template-columns: 96px 1fr; }
   h1 { font-size: 2.5rem; }
 }
 
@@ -413,7 +453,7 @@ caption { text-align: left; padding: 0.8rem; font-weight: 800; }
 }
 
 @media print {
-  .sparkle-field, .motif-row, .motif, .site-header, .site-footer, .no-print, .skip { display: none !important; }
+  .sparkle-field, .section-divider, .hero-aside, .craft-photo, .craft-frame, .site-header, .site-footer, .no-print, .skip { display: none !important; }
   html, body, .page, .panel, .card, .stitch-card, .card-banner, .card-body, .table-wrap, .results p, .hero, .hero-card, th, td, .pill, .bible-progress {
     background: white !important;
     background-image: none !important;

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MotifRow } from "../components/Decor";
+import { CraftPhoto, SectionDivider, yarnAlt } from "../components/CraftPhoto";
 import { getStitch, stitches } from "../lib/stitches";
 
 const featuredSlugs = ["chain", "slip-stitch", "single-crochet", "half-double-crochet", "double-crochet", "treble-crochet"];
@@ -13,7 +13,7 @@ export default function HomePage() {
   return (
     <div>
       <section className="hero">
-        <div>
+        <div className="hero-copy">
           <p className="eyebrow">Tiffany Brooke · The Ultimate Crochet Bible</p>
           <h1>Learn the stitch before the pattern rushes you.</h1>
           <p className="lede">Crochet Chaos is the companion site: {stitches.length} stitches with US and UK names, a glossary, planning calculators, and a project workspace that stays in this browser.</p>
@@ -32,12 +32,19 @@ export default function HomePage() {
             <Link className="secondary" href="/workspace">Open your projects</Link>
           </div>
         </div>
-        <div className="hero-card">
-          <MotifRow />
-          <strong>{stitches.length}</strong>
-          <span>stitch entries, each with how to make it, what it is for, and the mistake that usually causes trouble.</span>
+        <div className="hero-aside">
+          <CraftPhoto shot="hero" alt="" fill priority sizes="(max-width: 860px) 100vw, 520px" className="hero-aside-img" />
+          <div className="hero-card">
+            <CraftPhoto shot="yarn" alt={yarnAlt} className="portrait" sizes="160px" />
+            <div>
+              <strong>{stitches.length}</strong>
+              <span>stitch entries, each with how to make it, what it is for, and the mistake that usually causes trouble.</span>
+            </div>
+          </div>
         </div>
       </section>
+
+      <SectionDivider />
 
       <div className="card-grid">
         <Link className="card" href="/stitches">
@@ -57,6 +64,7 @@ export default function HomePage() {
         </Link>
       </div>
 
+      <SectionDivider />
       <h2 className="section-title">Start with the six stitches almost every pattern uses</h2>
       <div className="stitch-grid">
         {featured.map((stitch) => (

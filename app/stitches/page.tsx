@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { SectionDivider } from "../../components/CraftPhoto";
 import { StitchBrowser } from "../../components/StitchBrowser";
 
 export const metadata: Metadata = {
@@ -9,8 +10,11 @@ export const metadata: Metadata = {
 
 export default function StitchesPage() {
   return (
-    <Suspense fallback={<p>Loading the stitch dictionary…</p>}>
-      <StitchBrowser />
-    </Suspense>
+    <>
+      <SectionDivider />
+      <Suspense fallback={<p>Loading the stitch dictionary…</p>}>
+        <StitchBrowser />
+      </Suspense>
+    </>
   );
 }

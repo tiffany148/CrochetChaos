@@ -5,6 +5,7 @@ import Link from "next/link";
 import Encyclopedia from "../app/encyclopedia";
 import { loadWorkspace, serializeWorkspace, STORAGE_KEY_V1, STORAGE_KEY_V2 } from "../lib/storage";
 import type { Pattern } from "../lib/types";
+import { CraftPhoto, yarnAlt } from "./CraftPhoto";
 import { useTheme } from "./ThemeProvider";
 
 type Product = { id: string; name: string; category: string; price: number; description: string; url?: string };
@@ -111,8 +112,13 @@ export function Workspace() {
 
   return (
     <div>
-      <p className="eyebrow">Project workspace</p>
-      <h1>Keep your place.</h1>
+      <div className="with-portrait">
+        <CraftPhoto shot="yarn" alt={yarnAlt} className="portrait-sm" sizes="112px" />
+        <div>
+          <p className="eyebrow">Project workspace</p>
+          <h1>Keep your place.</h1>
+        </div>
+      </div>
       <p className="lede">Patterns, checklists, and the row counter stay in this browser under the same crochet-chaos keys. Planning math lives with the calculators.</p>
       <div className="anchor-nav" aria-label="Workspace sections">
         {([
@@ -156,6 +162,7 @@ export function Workspace() {
             </div>
             {!patterns.length ? (
               <div className="empty">
+                <CraftPhoto shot="yarn" alt={yarnAlt} className="portrait-feature" sizes="280px" />
                 <h3>Your shelf is ready</h3>
                 <p>Add a pattern to start tracking. Older projects saved as crochet-chaos-v1 are copied forward the first time this page loads.</p>
               </div>

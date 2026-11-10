@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MotifRow, SparkleField } from "./Decor";
+import { SparkleField } from "./Decor";
 import { ThemeProvider, useTheme } from "./ThemeProvider";
 
 const LINKS = [
@@ -38,10 +38,7 @@ function Shell({ children }: { children: React.ReactNode }) {
           </button>
         </nav>
       </header>
-      <main id="content" className="page">
-        <MotifRow />
-        {children}
-      </main>
+      <main id="content" className="page">{children}</main>
       <footer className="site-footer">Crochet Chaos · a companion for The Ultimate Crochet Bible by Tiffany Brooke</footer>
     </>
   );

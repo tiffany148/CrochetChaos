@@ -47,7 +47,7 @@ body {
     linear-gradient(160deg, #2a1238 0%, #5b1d86 46%, #14081f 100%);
   background-attachment: fixed;
 }
-h1, h2, .brand, .hero-card strong {
+h1, h2, .brand {
   font-family: "Lobster Two", cursive;
   font-weight: 700;
   letter-spacing: 0.01em;
@@ -96,24 +96,48 @@ html[data-theme="dark"] .card h2 {
   filter: drop-shadow(0 0 6px #ff2d8a) drop-shadow(0 0 8px #3ef0df);
 }
 .hero { position: relative; }
-.hero-aside {
+.hero-aside { display: grid; gap: 0.75rem; align-content: start; }
+.hero-photo {
   position: relative;
-  min-height: 460px;
-  display: flex;
-  align-items: flex-end;
+  aspect-ratio: 16 / 9;
   border-radius: 28px;
   overflow: hidden;
   border: 2px solid rgb(255 45 138 / 70%);
   box-shadow: var(--glow);
 }
-.hero-aside .craft-frame { position: absolute; inset: 0; }
-.hero-aside-img { object-position: right center !important; }
-.hero-aside::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(90deg, rgb(18 6 32 / 88%) 0%, rgb(18 6 32 / 35%) 46%, rgb(18 6 32 / 8%) 100%);
+.hero-photo .craft-frame { position: absolute; inset: 0; }
+.hero-aside-img { object-position: center center !important; }
+.hero-badge {
+  justify-self: start;
+  max-width: 16rem;
+  margin: 0;
+  padding: 0.55rem 0.9rem 0.7rem;
+  border-radius: 18px;
+  background: #1a0a28;
+  color: #fff8ef;
+  border: 2px solid #d6f25c;
+  box-shadow: 0 0 16px rgb(214 242 92 / 55%), 0 0 28px rgb(255 45 138 / 35%);
+}
+.hero-badge strong {
+  display: block;
+  font-family: "Lobster Two", cursive;
+  font-size: 1.7rem;
+  line-height: 1.1;
+  background: none;
+  color: #d6f25c;
+  -webkit-text-fill-color: #d6f25c;
+  filter: none;
+  animation: none;
+  text-shadow: 0 0 10px rgb(214 242 92 / 55%);
+}
+.hero-badge span {
+  display: block;
+  margin-top: 0.15rem;
+  font-family: Nunito, sans-serif;
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #fff8ef;
 }
 .section-divider {
   position: relative;
@@ -183,7 +207,7 @@ html[data-theme="dark"] .card h2 {
 .page { width: min(1120px, calc(100% - 2rem)); margin: 0 auto; padding: 1rem 0 4rem; }
 .hero {
   display: grid;
-  grid-template-columns: 1.4fr 0.8fr;
+  grid-template-columns: 1fr 1.15fr;
   gap: 1.5rem;
   align-items: center;
   padding: clamp(1.5rem, 4vw, 3rem);
@@ -198,33 +222,6 @@ html[data-theme="dark"] .card h2 {
 .eyebrow { margin: 0 0 0.6rem; color: var(--lime); font-size: 0.86rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; text-shadow: 0 0 10px rgb(214 242 92 / 70%); }
 .lede { font-size: 1.3rem; max-width: 40rem; color: var(--muted); }
 .hero-actions, .button-row { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.2rem; }
-.hero-card {
-  position: relative;
-  z-index: 1;
-  width: calc(100% - 2rem);
-  margin: 1rem;
-  display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 0.9rem;
-  align-items: center;
-  border-radius: 24px;
-  padding: 0.8rem;
-  background: rgb(18 6 32 / 82%);
-  color: #fff8ef;
-  border: 2px solid #d6f25c;
-  box-shadow: 0 0 24px rgb(214 242 92 / 55%), 0 0 40px rgb(255 45 138 / 45%);
-}
-.hero-card strong {
-  display: block;
-  font-size: 4rem;
-  background: none;
-  color: var(--lime);
-  -webkit-text-fill-color: var(--lime);
-  filter: drop-shadow(0 0 10px rgb(214 242 92 / 90%));
-  animation: none;
-}
-.hero-card span { color: #fff8ef; }
-
 .primary, .secondary {
   display: inline-flex;
   align-items: center;
@@ -443,8 +440,7 @@ caption { text-align: left; padding: 0.8rem; font-weight: 800; }
   .site-header { flex-wrap: wrap; align-items: flex-start; }
   .site-nav { width: 100%; justify-content: flex-start; }
   .heading-row, .tracker-head, .pattern-card, .with-portrait { align-items: flex-start; flex-direction: column; }
-  .hero-aside { min-height: 340px; }
-  .hero-card { grid-template-columns: 96px 1fr; }
+  .hero { grid-template-columns: 1fr; }
   h1 { font-size: 2.5rem; }
 }
 
@@ -454,7 +450,7 @@ caption { text-align: left; padding: 0.8rem; font-weight: 800; }
 
 @media print {
   .sparkle-field, .section-divider, .hero-aside, .craft-photo, .craft-frame, .site-header, .site-footer, .no-print, .skip { display: none !important; }
-  html, body, .page, .panel, .card, .stitch-card, .card-banner, .card-body, .table-wrap, .results p, .hero, .hero-card, th, td, .pill, .bible-progress {
+  html, body, .page, .panel, .card, .stitch-card, .card-banner, .card-body, .table-wrap, .results p, .hero, .hero-badge, th, td, .pill, .bible-progress {
     background: white !important;
     background-image: none !important;
     color: black !important;
@@ -463,7 +459,7 @@ caption { text-align: left; padding: 0.8rem; font-weight: 800; }
     filter: none !important;
     border-color: #bbb !important;
   }
-  h1, h2, h3, p, a, li, .lede, .muted, .hint, .eyebrow, .pill, .card-banner h2, .results strong, .brand, caption {
+  h1, h2, h3, p, a, li, strong, .lede, .muted, .hint, .eyebrow, .pill, .card-banner h2, .results strong, .brand, caption {
     background: none !important;
     color: black !important;
     -webkit-text-fill-color: black !important;

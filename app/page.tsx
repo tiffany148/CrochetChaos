@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CraftPhoto, SectionDivider, yarnAlt } from "../components/CraftPhoto";
+import { CraftPhoto, SectionDivider } from "../components/CraftPhoto";
 import { getStitch, stitches } from "../lib/stitches";
 
 const featuredSlugs = ["chain", "slip-stitch", "single-crochet", "half-double-crochet", "double-crochet", "treble-crochet"];
@@ -33,14 +33,20 @@ export default function HomePage() {
           </div>
         </div>
         <div className="hero-aside">
-          <CraftPhoto shot="hero" alt="" fill priority sizes="(max-width: 860px) 100vw, 520px" className="hero-aside-img" />
-          <div className="hero-card">
-            <CraftPhoto shot="yarn" alt={yarnAlt} className="portrait" sizes="160px" />
-            <div>
-              <strong>{stitches.length}</strong>
-              <span>stitch entries, each with how to make it, what it is for, and the mistake that usually causes trouble.</span>
-            </div>
+          <div className="hero-photo">
+            <CraftPhoto
+              shot="hero"
+              alt="Pink, teal, purple, and lime balls of yarn with crochet hooks, stitch markers, and granny squares."
+              fill
+              priority
+              sizes="(max-width: 860px) 100vw, 680px"
+              className="hero-aside-img"
+            />
           </div>
+          <p className="hero-badge">
+            <strong>{stitches.length} stitches</strong>
+            <span>How to make them, what they are for, and how to fix them.</span>
+          </p>
         </div>
       </section>
 

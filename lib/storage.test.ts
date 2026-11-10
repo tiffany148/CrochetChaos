@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { loadWorkspace, serializeWorkspace } from "./storage";
+import { loadWorkspace, patchStoredTheme, serializeWorkspace } from "./storage";
 
 const scarf = {
   id: "scarf",
@@ -84,6 +84,22 @@ test("drops malformed records and ignores invalid JSON", () => {
   assert.equal(loaded.patterns[0]?.source, "");
   assert.equal(loaded.patterns[0]?.notes, "");
   assert.equal(loaded.patterns[0]?.current, 0);
+});
+
+test("a theme-only write does not erase saved projects or the v1 merge flag", () => {
+  const saved = serializeWorkspace({ patterns: [scarf], activeId: "scarf", theme: "light" });
+  const patched = patchStoredTheme(saved, "dark");
+  const loaded = loadWorkspace(patched, JSON.stringify({ patterns: [hat], activeId: "hat", theme: "light" }));
+  assert.deepEqual(loaded.patterns, [scarf]);
+  assert.equal(loaded.theme, "dark");
+  assert.equal(loaded.v1Merged, true);
+});
+
+test("a theme-only write before any v2 record stays eligible for v1 migration", () => {
+  const patched = patchStoredTheme(null, "dark");
+  const loaded = loadWorkspace(patched, JSON.stringify({ patterns: [scarf], activeId: "scarf", theme: "light" }));
+  assert.equal(loaded.patterns[0]?.id, "scarf");
+  assert.equal(loaded.theme, "dark");
 });
 
 test("saved v2 payload is readable and does not clear the migration flag", () => {

@@ -109,6 +109,25 @@ export function loadWorkspace(v2Raw: string | null, v1Raw: string | null): Works
   return { patterns, activeId, theme, v1Merged: true };
 }
 
+/**
+ * Change only the theme inside the current key.
+ * An empty record is written with v1Merged false so a later load can still copy v1 projects forward.
+ * The v1 key is never read or deleted here.
+ */
+export function patchStoredTheme(raw: string | null, theme: ThemeName): string {
+  if (raw) {
+    try {
+      const data: unknown = JSON.parse(raw);
+      if (typeof data === "object" && data !== null && !Array.isArray(data)) {
+        return JSON.stringify({ ...(data as Record<string, unknown>), theme });
+      }
+    } catch {
+      /* Replace an unreadable v2 value without touching v1. */
+    }
+  }
+  return JSON.stringify({ patterns: [], activeId: "", theme, legacy: { v1Merged: false } });
+}
+
 /** Serialize the current key. Does not include or erase the v1 payload. */
 export function serializeWorkspace(workspace: Pick<Workspace, "patterns" | "activeId" | "theme">): string {
   return JSON.stringify({

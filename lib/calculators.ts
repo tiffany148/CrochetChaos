@@ -147,6 +147,79 @@ export function evenIncreases(current: number, increases: number): { plain: numb
   return { plain: stitches / added - 1, repeats: added, result: stitches + added };
 }
 
+export type DogSweaterInput = {
+  neckCm: number;
+  chestCm: number;
+  backCm: number;
+  legSpacingCm: number;
+  stitchesPer10cm: number;
+  rowsPer10cm: number;
+  easeCm?: number;
+  collarCm?: number;
+};
+
+export type DogSweaterPlan = {
+  neckStitches: number;
+  chestStitches: number;
+  increases: number;
+  bridgeStitches: number;
+  backStitches: number;
+  bodyRows: number;
+  collarRows: number;
+  easeCm: number;
+  collarCm: number;
+};
+
+/**
+ * Planning counts for a simple neck-down crochet dog sweater.
+ * Chest stitches include ease. The chest bridge is the fabric between the front legs.
+ * The back stitch count is the chest count minus that bridge. This is not a graded pattern.
+ */
+export function dogSweaterPlan(input: DogSweaterInput): DogSweaterPlan | { error: string } {
+  const easeCm = input.easeCm ?? 2;
+  const collarCm = input.collarCm ?? 5;
+  const fields = [input.neckCm, input.chestCm, input.backCm, input.legSpacingCm, input.stitchesPer10cm, input.rowsPer10cm, collarCm];
+  if (fields.some((value) => !(value > 0)) || easeCm < 0) {
+    return { error: "Enter measurements and a gauge greater than zero." };
+  }
+  const neckStitches = Math.round((input.neckCm / 10) * input.stitchesPer10cm);
+  const chestStitches = Math.round(((input.chestCm + easeCm) / 10) * input.stitchesPer10cm);
+  const bridgeStitches = Math.round((input.legSpacingCm / 10) * input.stitchesPer10cm);
+  if (bridgeStitches >= chestStitches) {
+    return { error: "Leg spacing is as wide as, or wider than, the chest. Check the girth and the space between the front legs." };
+  }
+  return {
+    neckStitches,
+    chestStitches,
+    increases: Math.max(0, chestStitches - neckStitches),
+    bridgeStitches,
+    backStitches: chestStitches - bridgeStitches,
+    bodyRows: Math.round((input.backCm / 10) * input.rowsPer10cm),
+    collarRows: Math.round((collarCm / 10) * input.rowsPer10cm),
+    easeCm,
+    collarCm,
+  };
+}
+
+export function stitchesPerMinute(stitches: number, seconds: number): number {
+  if (!(stitches > 0) || !(seconds > 0)) return 0;
+  return (stitches / seconds) * 60;
+}
+
+/** Minutes for a project. Taller stitches use a height factor above 1. Single crochet is 1. */
+export function projectMinutes(stitchCount: number, perMinute: number, heightFactor: number): number {
+  if (!(stitchCount > 0) || !(perMinute > 0) || !(heightFactor > 0)) return 0;
+  return (stitchCount * heightFactor) / perMinute;
+}
+
+export const STITCH_PACE = [
+  { id: "slip", label: "Slip stitch", factor: 0.7 },
+  { id: "sc", label: "Single crochet (UK double)", factor: 1 },
+  { id: "hdc", label: "Half double (UK half treble)", factor: 1.25 },
+  { id: "dc", label: "Double crochet (UK treble)", factor: 1.6 },
+  { id: "tr", label: "Treble (UK double treble)", factor: 2 },
+] as const;
+
 export function parseInchMeasurement(value: string): { low: number; high: number; mid: number } | null {
   const parts = value
     .split(/[–-]/)

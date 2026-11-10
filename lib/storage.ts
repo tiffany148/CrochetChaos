@@ -36,6 +36,7 @@ function toPattern(value: unknown): Pattern | null {
   if (!Array.isArray(pattern.steps)) return null;
   const steps = pattern.steps.filter(isStep);
   const current = typeof pattern.current === "number" && Number.isFinite(pattern.current) ? pattern.current : 0;
+  const category = typeof pattern.category === "string" ? pattern.category.trim() : "";
   return {
     id: pattern.id,
     title: pattern.title,
@@ -43,6 +44,7 @@ function toPattern(value: unknown): Pattern | null {
     notes: typeof pattern.notes === "string" ? pattern.notes : "",
     current,
     steps,
+    ...(category ? { category } : {}),
   };
 }
 

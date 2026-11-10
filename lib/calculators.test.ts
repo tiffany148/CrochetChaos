@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { amigurumiSphere, countForLength, evenIncreases, foundationChains, grannySquare, parseInchMeasurement, rowsForHeight, skeinsNeeded, stitchesForWidth, yarnForRectangle } from "./calculators";
+import { amigurumiSphere, countForLength, dogSweaterPlan, evenIncreases, foundationChains, grannySquare, parseInchMeasurement, projectMinutes, rowsForHeight, skeinsNeeded, stitchesForWidth, stitchesPerMinute, yarnForRectangle } from "./calculators";
 import { hooksMatching } from "./hooks";
 import { glossary, matchTerms, sizeChartGroups, stitches } from "./stitches";
 
@@ -69,6 +69,27 @@ test("hook conversion uses the Craft Yarn Council millimeter chart", () => {
   assert.equal(hooksMatching("4.6").exact.length, 0);
   assert.equal(hooksMatching("4.6").nearest?.mm, 4.5);
   assert.equal(hooksMatching("k-10 1/2").exact[0]?.mm, 6.5);
+});
+
+test("a dog sweater worksheet turns measurements into section counts", () => {
+  const plan = dogSweaterPlan({ neckCm: 30, chestCm: 50, backCm: 40, legSpacingCm: 10, stitchesPer10cm: 16, rowsPer10cm: 20, easeCm: 0, collarCm: 5 });
+  assert.ok(!("error" in plan));
+  if ("error" in plan) return;
+  assert.equal(plan.neckStitches, 48);
+  assert.equal(plan.chestStitches, 80);
+  assert.equal(plan.increases, 32);
+  assert.equal(plan.bridgeStitches, 16);
+  assert.equal(plan.backStitches, 64);
+  assert.equal(plan.bodyRows, 80);
+  assert.equal(plan.collarRows, 10);
+  assert.equal("error" in dogSweaterPlan({ neckCm: 20, chestCm: 30, backCm: 20, legSpacingCm: 40, stitchesPer10cm: 10, rowsPer10cm: 10, easeCm: 0 }), true);
+});
+
+test("project time uses stitches per minute and a height factor", () => {
+  assert.equal(stitchesPerMinute(10, 30), 20);
+  assert.equal(projectMinutes(600, 20, 1), 30);
+  assert.equal(projectMinutes(600, 20, 1.6), 48);
+  assert.equal(projectMinutes(0, 20, 1), 0);
 });
 
 test("US and UK abbreviations resolve to the stitch entries", () => {

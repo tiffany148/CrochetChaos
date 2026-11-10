@@ -1,0 +1,16 @@
+{
+  "parts": [
+    { "slug": "welcome", "title": "Part One — Welcome to Crochet", "chapters": ["how-this-companion-is-organized"] },
+    { "slug": "first-stitches", "title": "Part Two — Your First Stitches", "chapters": [] },
+    { "slug": "reading", "title": "Part Three — Reading Crochet", "chapters": [] },
+    { "slug": "dictionary", "title": "Part Four — The Complete Stitch Dictionary", "chapters": [] },
+    { "slug": "techniques", "title": "Part Five — Techniques That Change Everything", "chapters": [] },
+    { "slug": "sos", "title": "Part Six — Crochet SOS", "chapters": [] },
+    { "slug": "fit", "title": "Part Seven — The Perfect Fit", "chapters": [] },
+    { "slug": "pets", "title": "Part Eight — Crochet for Pets", "chapters": [] },
+    { "slug": "amigurumi", "title": "Part Nine — Amigurumi and Sculptural Crochet", "chapters": [] },
+    { "slug": "advanced", "title": "Part Ten — Advanced Crochet Mastery", "chapters": [] },
+    { "slug": "patterns", "title": "Part Eleven — Create Your Own Patterns", "chapters": [] },
+    { "slug": "reference", "title": "Part Twelve — The Crocheter’s Reference Library", "chapters": [] }
+  ]
+}

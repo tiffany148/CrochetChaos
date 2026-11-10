@@ -3,6 +3,8 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import Encyclopedia from "../app/encyclopedia";
+import { mergePatterns, parseBackup } from "../lib/backup";
+import { PROJECT_CATEGORIES } from "../lib/categories";
 import { loadWorkspace, serializeWorkspace, STORAGE_KEY_V1, STORAGE_KEY_V2 } from "../lib/storage";
 import type { Pattern } from "../lib/types";
 import { CraftPhoto, yarnAlt } from "./CraftPhoto";
@@ -20,6 +22,10 @@ export function Workspace() {
   const [title, setTitle] = useState("");
   const [source, setSource] = useState("");
   const [instructions, setInstructions] = useState("");
+  const [category, setCategory] = useState<string>(PROJECT_CATEGORIES[0]);
+  const [customCategory, setCustomCategory] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("All");
+  const [backupRaw, setBackupRaw] = useState<string | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
@@ -63,7 +69,8 @@ export function Workspace() {
       .map((line) => line.trim())
       .filter(Boolean)
       .map((text) => ({ id: crypto.randomUUID(), text, done: false }));
-    const pattern: Pattern = { id: crypto.randomUUID(), title: cleanTitle, source: source.trim(), steps, current: 0, notes: "" };
+    const chosen = category === "Custom" ? customCategory.trim() : category;
+    const pattern: Pattern = { id: crypto.randomUUID(), title: cleanTitle, source: source.trim(), steps, current: 0, notes: "", ...(chosen ? { category: chosen } : {}) };
     setPatterns((old) => [pattern, ...old]);
     setActiveId(pattern.id);
     setTitle("");
@@ -98,6 +105,28 @@ export function Workspace() {
     } finally {
       setChatBusy(false);
     }
+  }
+
+  const shelfCategories = Array.from(new Set(patterns.map((pattern) => pattern.category).filter((item): item is string => Boolean(item))));
+  const visiblePatterns = categoryFilter === "All" ? patterns : patterns.filter((pattern) => pattern.category === categoryFilter);
+  const backup = backupRaw === null ? null : parseBackup(backupRaw);
+
+  function readBackup(file: File | undefined) {
+    if (!file) return;
+    file.text().then(setBackupRaw).catch(() => setBackupRaw("{"));
+  }
+
+  function applyBackup(mode: "merge" | "replace") {
+    if (!backup || backup.patterns.length === 0) return;
+    if (mode === "replace") {
+      setPatterns(backup.patterns);
+      setActiveId(backup.patterns.some((pattern) => pattern.id === backup.activeId) ? backup.activeId : backup.patterns[0].id);
+    } else {
+      const merged = mergePatterns(patterns, backup.patterns);
+      setPatterns(merged);
+      if (backup.activeId && merged.some((pattern) => pattern.id === backup.activeId)) setActiveId(backup.activeId);
+    }
+    setBackupRaw(null);
   }
 
   function exportBackup() {
@@ -147,6 +176,19 @@ export function Workspace() {
                 Source link (optional)
                 <input type="url" value={source} onChange={(event) => setSource(event.target.value)} placeholder="https://" />
               </label>
+              <label>
+                Category
+                <select value={category} onChange={(event) => setCategory(event.target.value)}>
+                  {PROJECT_CATEGORIES.map((item) => <option key={item}>{item}</option>)}
+                  <option>Custom</option>
+                </select>
+              </label>
+              {category === "Custom" && (
+                <label>
+                  Custom category
+                  <input value={customCategory} onChange={(event) => setCustomCategory(event.target.value)} placeholder="Market bags" />
+                </label>
+              )}
               <label className="full">
                 Instructions
                 <textarea rows={7} value={instructions} onChange={(event) => setInstructions(event.target.value)} placeholder="Put each row or round on its own line to create checklist items." />
@@ -160,19 +202,45 @@ export function Workspace() {
               <h2>Your patterns</h2>
               <button className="secondary" type="button" onClick={exportBackup} disabled={!patterns.length}>Export backup</button>
             </div>
+            <div className="anchor-nav" aria-label="Filter by category">
+              <button type="button" className="secondary" aria-pressed={categoryFilter === "All"} onClick={() => setCategoryFilter("All")}>All</button>
+              {shelfCategories.map((item) => (
+                <button type="button" key={item} className="secondary" aria-pressed={categoryFilter === item} onClick={() => setCategoryFilter(item)}>{item}</button>
+              ))}
+            </div>
+            <form className="form-grid" onSubmit={(event) => event.preventDefault()}>
+              <label className="full">
+                Import a JSON backup
+                <input type="file" accept="application/json,.json" onChange={(event) => readBackup(event.target.files?.[0])} />
+              </label>
+            </form>
+            {backup && (
+              <div className="panel" role="region" aria-label="Backup preview">
+                <h3>Backup preview</h3>
+                {backup.errors.map((error) => <p className="error" key={error} role="alert">{error}</p>)}
+                <p>{backup.patterns.length} usable patterns{backup.rejected ? `, ${backup.rejected} skipped` : ""}.</p>
+                <ul>{backup.patterns.slice(0, 8).map((pattern) => <li key={pattern.id}>{pattern.title}{pattern.category ? ` · ${pattern.category}` : ""}</li>)}</ul>
+                <div className="button-row">
+                  <button type="button" className="primary" disabled={!backup.patterns.length} onClick={() => applyBackup("merge")}>Merge into this shelf</button>
+                  <button type="button" className="secondary" disabled={!backup.patterns.length} onClick={() => applyBackup("replace")}>Replace this shelf</button>
+                  <button type="button" className="secondary" onClick={() => setBackupRaw(null)}>Cancel</button>
+                </div>
+                <p className="hint">Replace changes only the current browser shelf. The original crochet-chaos-v1 key is left in place.</p>
+              </div>
+            )}
             {!patterns.length ? (
               <div className="empty">
                 <CraftPhoto shot="yarn" alt={yarnAlt} className="portrait-feature" sizes="280px" />
                 <h3>Your shelf is ready</h3>
                 <p>Add a pattern to start tracking. Older projects saved as crochet-chaos-v1 are copied forward the first time this page loads.</p>
               </div>
-            ) : (
+            ) : visiblePatterns.length === 0 ? <p>No projects in this category.</p> : (
               <div className="pattern-list">
-                {patterns.map((pattern) => (
+                {visiblePatterns.map((pattern) => (
                   <article className="pattern-card" key={pattern.id}>
                     <div>
                       <h3>{pattern.title}</h3>
-                      <p className="muted">{pattern.steps.length} checklist steps{pattern.id === activeId ? " · Current project" : ""}</p>
+                      <p className="muted">{pattern.category ? `${pattern.category} · ` : ""}{pattern.steps.length} checklist steps{pattern.id === activeId ? " · Current project" : ""}</p>
                       {pattern.source && <a href={pattern.source} target="_blank" rel="noreferrer">Open source</a>}
                     </div>
                     <button className="secondary" type="button" onClick={() => { setActiveId(pattern.id); setTab("tracker"); }}>Open tracker</button>

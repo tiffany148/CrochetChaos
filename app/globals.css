@@ -415,6 +415,20 @@ caption { text-align: left; padding: 0.8rem; font-weight: 800; }
 .bible-view-tabs button.active, .bible-actions button[aria-pressed="true"] { background: var(--lime); border-color: transparent; font-weight: 800; }
 
 .round-list { margin: 0.4rem 0 0; padding-left: 1.2rem; }
+.book-body h2 { margin-top: 1.4rem; }
+.tip { border-radius: 20px; padding: 1rem 1.15rem; margin: 1rem 0; border: 2px solid; }
+.tip strong { display: block; font-family: "Lobster Two", cursive; font-size: 1.45rem; margin-bottom: 0.35rem; background: none; -webkit-text-fill-color: currentColor; filter: none; animation: none; }
+.tip p { margin: 0; }
+.tip-wisdom { background: #2a1848; border-color: #d4c2ff; color: #fff8ef; }
+.tip-dang { background: #243014; border-color: #d6f25c; color: #fff8ef; }
+.tip-fix { background: #3a1024; border-color: #ff8ad4; color: #fff8ef; }
+.step-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+.step-card { background: var(--surface); color: var(--ink); border-radius: 20px; overflow: hidden; border: 2px solid #3ef0df; box-shadow: 0 0 16px rgb(62 240 223 / 30%); }
+.step-photo { position: relative; aspect-ratio: 4 / 3; }
+.step-num { position: absolute; z-index: 1; top: 0.6rem; left: 0.6rem; min-width: 2.2rem; height: 2.2rem; display: grid; place-items: center; border-radius: 999px; background: #d6f25c; color: #2a1238; font-weight: 800; box-shadow: 0 0 12px #d6f25c; }
+.step-copy { padding: 0.8rem 1rem 1rem; }
+.checkpoint { font-weight: 800; color: #9d0058; }
+html[data-theme="dark"] .checkpoint { color: #ffd0ea; }
 .round-list li { margin: 0.35rem 0; }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -440,7 +454,7 @@ caption { text-align: left; padding: 0.8rem; font-weight: 800; }
   .site-header { flex-wrap: wrap; align-items: flex-start; }
   .site-nav { width: 100%; justify-content: flex-start; }
   .heading-row, .tracker-head, .pattern-card, .with-portrait { align-items: flex-start; flex-direction: column; }
-  .hero { grid-template-columns: 1fr; }
+  .hero, .step-grid { grid-template-columns: 1fr; }
   h1 { font-size: 2.5rem; }
 }
 

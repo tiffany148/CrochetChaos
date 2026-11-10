@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import {
   BLANKET_SIZES,
@@ -96,6 +97,8 @@ export function Calculators() {
         <a href="#sphere">Amigurumi</a>
         <a href="#increases">Increases</a>
         <a href="#garment">Garment stitches</a>
+        <Link href="/calculators/dog-sweater">Dog sweater</Link>
+        <Link href="/calculators/time">Time</Link>
       </nav>
 
       <section className="panel" id="yarn">

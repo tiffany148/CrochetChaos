@@ -6,6 +6,7 @@ import { SparkleField } from "./Decor";
 import { ThemeProvider, useTheme } from "./ThemeProvider";
 
 const LINKS = [
+  { href: "/book", label: "Book" },
   { href: "/stitches", label: "Stitches" },
   { href: "/glossary", label: "Glossary" },
   { href: "/calculators", label: "Calculators" },

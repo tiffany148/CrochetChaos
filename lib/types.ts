@@ -11,4 +11,5 @@ export type Pattern = {
   steps: Step[];
   current: number;
   notes: string;
+  category?: string;
 };

@@ -68,7 +68,7 @@ export function BookBody({ blocks }: { blocks: BookBlock[] }) {
     <div className="book-body">
       {blocks.map((block, index) => {
         if (block.type === "heading") {
-          if (block.level === 2) return <h2 key={index}>{inline(block.text, `h${index}`)}</h2>;
+          if (block.level <= 2) return <h2 key={index}>{inline(block.text, `h${index}`)}</h2>;
           if (block.level === 3) return <h3 key={index}>{inline(block.text, `h${index}`)}</h3>;
           return <h4 key={index}>{inline(block.text, `h${index}`)}</h4>;
         }

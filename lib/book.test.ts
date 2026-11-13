@@ -84,7 +84,10 @@ test("the imported book is 15 parts and 84 chapters", () => {
   const book = loadBook();
   assert.equal(book.parts.length, 15);
   assert.equal(book.chapterCount, 84);
-  assert.equal(book.documents.length, 101);
+  assert.equal(book.documents.length, 102);
+  assert.equal(book.documents.at(-1)?.slug, "about-the-author");
+  assert.ok(book.sectionCovers?.dictionary.endsWith("/dictionary.jpg"));
+  assert.ok(book.sectionCovers?.index.endsWith("/index.jpg"));
   const grip = getChapter("ch09-grip-tension-and-first-stitches");
   assert.ok(grip);
   assert.match(grip.plainText, /Step pictures are generated illustrations, not photographs of a physical sample/);

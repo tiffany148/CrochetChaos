@@ -40,7 +40,10 @@ function Shell({ children }: { children: React.ReactNode }) {
         </nav>
       </header>
       <main id="content" className="page">{children}</main>
-      <footer className="site-footer">Crochet Chaos · a companion for The Ultimate Crochet Bible by Tiffany Stark</footer>
+      <footer className="site-footer">
+        <p>Crochet Chaos · a companion for The Ultimate Crochet Bible by Tiffany Stark</p>
+        <p><Link href="/about">About Tiffany Stark</Link></p>
+      </footer>
     </>
   );
 }

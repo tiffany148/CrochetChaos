@@ -49,6 +49,28 @@ export default function BookPage() {
           </ol>
         </section>
       ))}
+      {book.sectionCovers && (
+        <section className="panel">
+          <h2>Section covers</h2>
+          <div className="section-covers">
+            <figure>
+              <img src={book.sectionCovers.dictionary} alt="Section cover for the Stitch and Abbreviation Dictionary: a colorful crochet swatch, hook, yarn, and a magnifying glass." />
+              <figcaption>Stitch and Abbreviation Dictionary</figcaption>
+            </figure>
+            <figure>
+              <img src={book.sectionCovers.index} alt="Section cover for the Index: stacked granny squares beside a wooden box of colored index tabs." />
+              <figcaption>Index</figcaption>
+            </figure>
+          </div>
+        </section>
+      )}
+      {book.about && (
+        <section className="panel">
+          <h2>About the author</h2>
+          <p><Link href={`/book/${book.about.slug}`}>{book.about.title}</Link></p>
+          <p><Link href="/about">Open the About page</Link></p>
+        </section>
+      )}
     </div>
   );
 }

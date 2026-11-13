@@ -855,5 +855,15 @@
   "granny": "assets/art/badges/granny.png",
   "hint": "assets/art/badges/hint.png",
   "fix": "assets/art/badges/fix.png"
+ },
+ "section_covers": {
+  "dictionary": "assets/art/covers/dictionary.jpg",
+  "index": "assets/art/covers/index.jpg"
+ },
+ "about_the_author": {
+  "title": "About the Author",
+  "slug": "about-the-author",
+  "file": "chapters/about-the-author.md",
+  "image": "assets/art/about-the-author.jpg"
  }
 }

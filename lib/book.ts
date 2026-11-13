@@ -10,14 +10,14 @@ export type StepPhoto = {
 export type CalloutKind = "wisdom" | "dang" | "fix" | "hint" | "safety" | "pattern" | "status" | "try";
 
 export type BookBlock =
-  | { type: "heading"; level: 2 | 3 | 4; text: string }
+  | { type: "heading"; level: 1 | 2 | 3 | 4; text: string }
   | { type: "paragraph"; text: string }
   | { type: "quote"; text: string }
   | { type: "list"; ordered: boolean; items: string[] }
   | { type: "wisdom" | "dang" | "fix"; text: string }
   | { type: "callout"; kind: CalloutKind; title: string; text: string }
   | { type: "steps"; steps: StepPhoto[] }
-  | { type: "image"; src: string; alt: string; kind: "symbol" | "figure" }
+  | { type: "image"; src: string; alt: string; kind: "symbol" | "figure" | "poster" }
   | { type: "table"; headers: string[]; rows: string[][] }
   | { type: "rule" };
 
@@ -88,8 +88,10 @@ function parseStepLine(line: string, options?: ParseOptions): StepPhoto | null {
   return { n, src, caption: parts[2], checkpoint: parts.slice(3).join(" | "), embeddedBadge: false };
 }
 
-function imageKind(src: string): "symbol" | "figure" {
-  return src.includes("/symbols/") ? "symbol" : "figure";
+function imageKind(src: string): "symbol" | "figure" | "poster" {
+  if (src.includes("/symbols/")) return "symbol";
+  if (src.includes("about-the-author")) return "poster";
+  return "figure";
 }
 
 function parseImageLine(line: string): { alt: string; raw: string } | null {
@@ -287,10 +289,10 @@ export function parseChapter(markdown: string, options?: ParseOptions): ParsedCh
       continue;
     }
 
-    const heading = line.match(/^(#{2,4})\s+(.+)$/);
+    const heading = line.match(/^(#{1,4})\s+(.+)$/);
     if (heading) {
-      const level = heading[1].length;
-      blocks.push({ type: "heading", level: level === 2 ? 2 : level === 3 ? 3 : 4, text: heading[2].trim() });
+      const level = heading[1].length as 1 | 2 | 3 | 4;
+      blocks.push({ type: "heading", level, text: heading[2].trim() });
       index += 1;
       continue;
     }

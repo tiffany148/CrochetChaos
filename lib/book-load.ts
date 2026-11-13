@@ -38,7 +38,8 @@ type Manifest = {
   parts: { n: number; title: string; color: string; cover: string }[];
   chapters: ManifestChapter[];
   front_matter: string;
-  about_the_author?: string;
+  about_the_author?: { title: string; slug: string; file: string; image: string };
+  section_covers?: { dictionary?: string; index?: string };
   badges: Record<string, string>;
 };
 
@@ -79,7 +80,7 @@ function readDocument(fileRel: string, meta: Omit<BookChapter, "blocks" | "plain
     resolveImage: (src) => resolveBookImage(full, src),
   });
   const title = meta.title || parsed.title || meta.slug;
-  const blocks = !meta.title && parsed.blocks[0]?.type === "heading" && parsed.blocks[0].text === title
+  const blocks = parsed.blocks[0]?.type === "heading" && parsed.blocks[0].text === title
     ? parsed.blocks.slice(1)
     : parsed.blocks;
   const firstParagraph = blocks.find((block) => block.type === "paragraph");
@@ -140,7 +141,16 @@ function linkChapters(chapters: BookChapter[]): void {
   }
 }
 
-function loadBookUncached(): { parts: BookPart[]; chapters: BookChapter[]; documents: BookChapter[]; front: BookChapter; dictionary: BookChapter; about: BookChapter | null; chapterCount: number } {
+function loadBookUncached(): {
+  parts: BookPart[];
+  chapters: BookChapter[];
+  documents: BookChapter[];
+  front: BookChapter;
+  dictionary: BookChapter;
+  about: BookChapter | null;
+  sectionCovers: { dictionary: string; index: string } | null;
+  chapterCount: number;
+} {
   const front = readDocument(manifest.front_matter, {
     slug: "front-matter",
     partSlug: "front-matter",
@@ -194,8 +204,9 @@ function loadBookUncached(): { parts: BookPart[]; chapters: BookChapter[]; docum
   });
 
   const about = manifest.about_the_author
-    ? readDocument(manifest.about_the_author, {
-      slug: path.basename(manifest.about_the_author, ".md"),
+    ? readDocument(manifest.about_the_author.file, {
+      slug: manifest.about_the_author.slug,
+      title: manifest.about_the_author.title,
       partSlug: "about",
       partTitle: "About the author",
       partNumber: null,
@@ -203,11 +214,14 @@ function loadBookUncached(): { parts: BookPart[]; chapters: BookChapter[]; docum
       kind: "about",
     })
     : null;
+  const sectionCovers = manifest.section_covers?.dictionary && manifest.section_covers.index
+    ? { dictionary: publicAsset(manifest.section_covers.dictionary), index: publicAsset(manifest.section_covers.index) }
+    : null;
 
   const documents = [front, dictionary, ...parts.flatMap((part) => [part.intro, ...part.chapters]), ...(about ? [about] : [])];
   linkChapters(documents);
   const chapters = documents.filter((document) => document.kind === "chapter");
-  return { parts, chapters, documents, front, dictionary, about, chapterCount: chapters.length };
+  return { parts, chapters, documents, front, dictionary, about, sectionCovers, chapterCount: chapters.length };
 }
 
 let cached: ReturnType<typeof loadBookUncached> | null = null;

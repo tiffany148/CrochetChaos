@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PhotoBanner } from "../../components/CraftPhoto";
 import Encyclopedia from "../encyclopedia";
 
 export const metadata: Metadata = {
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
 export default function LessonsPage() {
   return (
     <div>
+      <PhotoBanner shot="stitch" priority />
       <p className="eyebrow">Lesson notes</p>
       <h1>Short lessons, saved on this device.</h1>
       <p className="lede">These are the existing lesson notes. The stitch-by-stitch reference is the dictionary, which uses the shared 140-entry source.</p>

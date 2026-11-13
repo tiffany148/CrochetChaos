@@ -91,10 +91,17 @@ html[data-theme="dark"] .card h2 {
 .sparkle {
   position: absolute;
   background: #fff8ef;
+  opacity: 0.95;
   clip-path: polygon(50% 0%, 62% 35%, 100% 38%, 70% 60%, 80% 100%, 50% 76%, 20% 100%, 30% 60%, 0% 38%, 38% 35%);
   animation: twinkle 2.6s ease-in-out infinite;
-  filter: drop-shadow(0 0 6px #ff2d8a) drop-shadow(0 0 8px #3ef0df);
+  filter: drop-shadow(0 0 5px #fff) drop-shadow(0 0 8px #ff2d8a) drop-shadow(0 0 12px #3ef0df);
 }
+.sparkle-dot {
+  clip-path: none;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0 35%, #fff8ef 45%, transparent 72%);
+}
+.sparkle-steady { animation: none; opacity: 1; }
 .hero { position: relative; }
 .hero-aside { display: grid; gap: 0.75rem; align-content: start; }
 .hero-photo {
@@ -141,14 +148,66 @@ html[data-theme="dark"] .card h2 {
 }
 .section-divider {
   position: relative;
-  height: 148px;
+  height: clamp(128px, 18vw, 190px);
   margin: 1.4rem 0;
   border-radius: 28px;
   overflow: hidden;
   border: 2px solid rgb(62 240 223 / 45%);
   box-shadow: 0 0 22px rgb(255 45 138 / 35%);
 }
-.section-divider .craft-frame { position: absolute; inset: 0; }
+.section-divider .craft-frame,
+.photo-banner .craft-frame,
+.gallery-frame .craft-frame,
+.card-photo-frame .craft-frame { position: absolute; inset: 0; }
+.photo-banner {
+  position: relative;
+  height: clamp(168px, 28vw, 300px);
+  width: 100%;
+  margin: 0 0 1.15rem;
+  border-radius: 28px;
+  overflow: hidden;
+  border: 2px solid rgb(255 45 138 / 75%);
+  box-shadow: var(--glow), 0 0 36px rgb(124 58 237 / 40%);
+}
+.photo-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+  margin: 1.2rem 0 0.2rem;
+}
+.gallery-frame {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  border-radius: 26px;
+  overflow: hidden;
+  border: 2px solid rgb(255 45 138 / 70%);
+  box-shadow: 0 0 0 1px rgb(62 240 223 / 40%), var(--glow);
+}
+.gallery-frame:nth-child(2n) { border-color: rgb(62 240 223 / 75%); }
+.card-photo { overflow: hidden; padding: 0 0 1.25rem; }
+.card-photo-frame {
+  position: relative;
+  aspect-ratio: 16 / 8;
+  margin-bottom: 0.85rem;
+}
+.card-copy { padding: 0 1.25rem; }
+.frame-glitter { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.frame-glitter i {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #fffdf8;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  filter: drop-shadow(0 0 4px #fff) drop-shadow(0 0 7px #ff2d8a) drop-shadow(0 0 10px #3ef0df);
+}
+.frame-glitter i:nth-child(1) { top: 10px; left: 12px; width: 16px; height: 16px; }
+.frame-glitter i:nth-child(2) { top: 16px; right: 18px; width: 11px; height: 11px; }
+.frame-glitter i:nth-child(3) { bottom: 12px; left: 18px; width: 9px; height: 9px; }
+.frame-glitter i:nth-child(4) { bottom: 14px; right: 14px; width: 15px; height: 15px; }
+.frame-glitter i:nth-child(5) { top: 46%; left: 10px; width: 8px; height: 8px; }
+.frame-glitter i:nth-child(6) { top: 22%; right: 34%; width: 7px; height: 7px; }
+.banner-img { object-position: center center !important; }
 .divider-img { object-position: center center !important; }
 .with-portrait { display: flex; align-items: center; gap: 1rem; }
 .portrait, .portrait-sm, .portrait-feature { border-radius: 22px; object-fit: cover; box-shadow: 0 0 18px rgb(255 45 138 / 45%); }
@@ -205,6 +264,7 @@ html[data-theme="dark"] .card h2 {
 .theme-toggle { white-space: nowrap; }
 
 .page { width: min(1120px, calc(100% - 2rem)); margin: 0 auto; padding: 1rem 0 4rem; }
+.page, .photo-gallery, .card-grid, .gallery-frame, .card, .hero, .calc-layout, .form-grid { min-width: 0; }
 .hero {
   display: grid;
   grid-template-columns: 1fr 1.15fr;
@@ -266,6 +326,19 @@ button:disabled { opacity: 0.55; cursor: not-allowed; }
 .panel:nth-of-type(4n+3) { border-color: #b794f6; }
 .panel:nth-of-type(4n) { border-color: #d6f25c; }
 .card p, .panel .muted, .panel .hint, .card .muted, .card-body .muted, .stitch-card .muted { color: var(--ink-soft); }
+.card .eyebrow, .panel .eyebrow {
+  color: #5b21b6;
+  text-shadow: none;
+}
+.panel a, .card a, .table-wrap a { color: var(--teal); }
+html[data-theme="dark"] .card .eyebrow,
+html[data-theme="dark"] .panel .eyebrow {
+  color: var(--lime);
+  text-shadow: 0 0 10px rgb(214 242 92 / 70%);
+}
+html[data-theme="dark"] .panel a,
+html[data-theme="dark"] .card a,
+html[data-theme="dark"] .table-wrap a { color: #b8fff6; }
 .panel label, .card label, .field-label { color: var(--ink); }
 .section-title { margin: 2.2rem 0 0.8rem; }
 
@@ -441,8 +514,8 @@ html[data-theme="dark"] .checkpoint { color: #ffd0ea; }
   }
 }
 @keyframes twinkle {
-  0%, 100% { opacity: 0.25; transform: scale(0.65) rotate(0deg); }
-  50% { opacity: 1; transform: scale(1) rotate(18deg); }
+  0%, 100% { opacity: 0.72; transform: scale(0.86) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.12) rotate(16deg); }
 }
 @keyframes shimmer {
   from { background-position: 0% center; }
@@ -456,6 +529,15 @@ html[data-theme="dark"] .checkpoint { color: #ffd0ea; }
   .heading-row, .tracker-head, .pattern-card, .with-portrait { align-items: flex-start; flex-direction: column; }
   .hero, .step-grid { grid-template-columns: 1fr; }
   h1 { font-size: 2.5rem; }
+  .photo-gallery { gap: 0.6rem; }
+  .gallery-frame { aspect-ratio: 1 / 1; border-radius: 18px; }
+  .photo-banner { border-radius: 20px; }
+}
+@media (max-width: 420px) {
+  .page { width: min(1120px, calc(100% - 1.25rem)); }
+  .hero { padding: 1.1rem; border-radius: 24px; }
+  .site-nav a, .theme-toggle, .anchor-nav a { padding: 0.55rem 0.72rem; }
+  .primary, .secondary { white-space: normal; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -463,7 +545,7 @@ html[data-theme="dark"] .checkpoint { color: #ffd0ea; }
 }
 
 @media print {
-  .sparkle-field, .section-divider, .hero-aside, .craft-photo, .craft-frame, .site-header, .site-footer, .no-print, .skip { display: none !important; }
+  .sparkle-field, .section-divider, .hero-aside, .craft-photo, .craft-frame, .decor-only, .photo-banner, .photo-gallery, .gallery-frame, .card-photo-frame, .frame-glitter, .site-header, .site-footer, .no-print, .skip { display: none !important; }
   html, body, .page, .panel, .card, .stitch-card, .card-banner, .card-body, .table-wrap, .results p, .hero, .hero-badge, th, td, .pill, .bible-progress {
     background: white !important;
     background-image: none !important;

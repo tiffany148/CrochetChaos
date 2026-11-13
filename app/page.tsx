@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CraftPhoto, SectionDivider } from "../components/CraftPhoto";
+import { CardPhoto, CraftPhoto, PhotoBanner, PhotoGallery, SectionDivider } from "../components/CraftPhoto";
 import { getStitch, stitches } from "../lib/stitches";
 
 const featuredSlugs = ["chain", "slip-stitch", "single-crochet", "half-double-crochet", "double-crochet", "treble-crochet"];
@@ -50,27 +50,38 @@ export default function HomePage() {
         </div>
       </section>
 
+      <PhotoGallery items={["granny", "yarn", "cascade", "hooks"]} />
+
       <SectionDivider />
 
       <div className="card-grid">
-        <Link className="card" href="/stitches">
-          <p className="eyebrow">Dictionary</p>
-          <h2>Stitches</h2>
-          <p>Filter by difficulty or category. Open one stitch at a time instead of a wall of tiny symbols.</p>
+        <Link className="card card-photo" href="/stitches">
+          <CardPhoto shot="squares" />
+          <div className="card-copy">
+            <p className="eyebrow">Dictionary</p>
+            <h2>Stitches</h2>
+            <p>Filter by difficulty or category. Open one stitch at a time instead of a wall of tiny symbols.</p>
+          </div>
         </Link>
-        <Link className="card" href="/calculators">
-          <p className="eyebrow">Planning</p>
-          <h2>Calculators</h2>
-          <p>Yardage, foundation chains, hook sizes, US/UK terms, blankets, granny squares, and simple garment math.</p>
+        <Link className="card card-photo" href="/calculators">
+          <CardPhoto shot="swatches" />
+          <div className="card-copy">
+            <p className="eyebrow">Planning</p>
+            <h2>Calculators</h2>
+            <p>Yardage, foundation chains, hook sizes, US/UK terms, blankets, granny squares, and simple garment math.</p>
+          </div>
         </Link>
-        <Link className="card" href="/reference">
-          <p className="eyebrow">On paper</p>
-          <h2>Print sheets</h2>
-          <p>Abbreviations, the hook chart, and the stitch list, set in type you can read away from the screen.</p>
+        <Link className="card card-photo" href="/reference">
+          <CardPhoto shot="book" />
+          <div className="card-copy">
+            <p className="eyebrow">On paper</p>
+            <h2>Print sheets</h2>
+            <p>Abbreviations, the hook chart, and the stitch list, set in type you can read away from the screen.</p>
+          </div>
         </Link>
       </div>
 
-      <SectionDivider />
+      <PhotoBanner shot="stitch" />
       <h2 className="section-title">Start with the six stitches almost every pattern uses</h2>
       <div className="stitch-grid">
         {featured.map((stitch) => (

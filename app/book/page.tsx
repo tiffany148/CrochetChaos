@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BookSearch } from "../../components/BookSearch";
+import { PhotoBanner } from "../../components/CraftPhoto";
 import { loadBook } from "../../lib/book-load";
 
 export const metadata: Metadata = {
@@ -13,6 +14,7 @@ export default function BookPage() {
   const published = chapters.length;
   return (
     <div>
+      <PhotoBanner shot="book" priority />
       <p className="eyebrow">The Ultimate Crochet Bible</p>
       <h1>Read a chapter.</h1>
       <p className="lede">

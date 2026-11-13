@@ -141,13 +141,8 @@ export function Workspace() {
 
   return (
     <div>
-      <div className="with-portrait">
-        <CraftPhoto shot="yarn" alt={yarnAlt} className="portrait-sm" sizes="112px" />
-        <div>
-          <p className="eyebrow">Project workspace</p>
-          <h1>Keep your place.</h1>
-        </div>
-      </div>
+      <p className="eyebrow">Project workspace</p>
+      <h1>Keep your place.</h1>
       <p className="lede">Patterns, checklists, and the row counter stay in this browser under the same crochet-chaos keys. Planning math lives with the calculators.</p>
       <div className="anchor-nav" aria-label="Workspace sections">
         {([

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PhotoBanner } from "../../../components/CraftPhoto";
 import { TimeEstimate } from "../../../components/TimeEstimate";
 
 export const metadata: Metadata = {
@@ -7,5 +8,10 @@ export const metadata: Metadata = {
 };
 
 export default function TimePage() {
-  return <TimeEstimate />;
+  return (
+    <>
+      <PhotoBanner shot="yarn" priority />
+      <TimeEstimate />
+    </>
+  );
 }

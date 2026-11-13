@@ -16,7 +16,7 @@ export default function BookPage() {
   return (
     <div>
       <PhotoBanner shot="book" priority />
-      <p className="eyebrow">Tiffany Brooke · The Ultimate Crochet Bible</p>
+      <p className="eyebrow">Tiffany Stark · The Ultimate Crochet Bible</p>
       <h1>Fifteen parts. Eighty-four chapters.</h1>
       <p className="lede">
         The reader has the front matter, the abbreviation dictionary, {book.parts.length} parts, and {book.chapterCount} chapters, in the manuscript’s order. US terms are used, with UK names beside them. The front matter says what in this working copy has and has not been test-crocheted.

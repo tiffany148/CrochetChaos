@@ -14,7 +14,7 @@ export default function HomePage() {
     <div>
       <section className="hero">
         <div className="hero-copy">
-          <p className="eyebrow">Tiffany Brooke · The Ultimate Crochet Bible</p>
+          <p className="eyebrow">Tiffany Stark · The Ultimate Crochet Bible</p>
           <h1>Learn the stitch before the pattern rushes you.</h1>
           <p className="lede">Crochet Chaos is the companion site: {stitches.length} stitches with US and UK names, a glossary, planning calculators, and a project workspace that stays in this browser.</p>
           <form action="/stitches" style={{ marginTop: "1.2rem", maxWidth: "36rem" }}>

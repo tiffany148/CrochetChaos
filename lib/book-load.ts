@@ -11,7 +11,7 @@ export type BookChapter = {
   partTitle: string;
   partNumber: number | null;
   chapterNumber: number | null;
-  kind: "front" | "dictionary" | "part" | "chapter";
+  kind: "front" | "dictionary" | "part" | "chapter" | "about";
   blocks: BookBlock[];
   plainText: string;
 };
@@ -38,6 +38,7 @@ type Manifest = {
   parts: { n: number; title: string; color: string; cover: string }[];
   chapters: ManifestChapter[];
   front_matter: string;
+  about_the_author?: string;
   badges: Record<string, string>;
 };
 
@@ -139,7 +140,7 @@ function linkChapters(chapters: BookChapter[]): void {
   }
 }
 
-function loadBookUncached(): { parts: BookPart[]; chapters: BookChapter[]; documents: BookChapter[]; front: BookChapter; dictionary: BookChapter; chapterCount: number } {
+function loadBookUncached(): { parts: BookPart[]; chapters: BookChapter[]; documents: BookChapter[]; front: BookChapter; dictionary: BookChapter; about: BookChapter | null; chapterCount: number } {
   const front = readDocument(manifest.front_matter, {
     slug: "front-matter",
     partSlug: "front-matter",
@@ -192,10 +193,21 @@ function loadBookUncached(): { parts: BookPart[]; chapters: BookChapter[]; docum
     };
   });
 
-  const documents = [front, dictionary, ...parts.flatMap((part) => [part.intro, ...part.chapters])];
+  const about = manifest.about_the_author
+    ? readDocument(manifest.about_the_author, {
+      slug: path.basename(manifest.about_the_author, ".md"),
+      partSlug: "about",
+      partTitle: "About the author",
+      partNumber: null,
+      chapterNumber: null,
+      kind: "about",
+    })
+    : null;
+
+  const documents = [front, dictionary, ...parts.flatMap((part) => [part.intro, ...part.chapters]), ...(about ? [about] : [])];
   linkChapters(documents);
   const chapters = documents.filter((document) => document.kind === "chapter");
-  return { parts, chapters, documents, front, dictionary, chapterCount: chapters.length };
+  return { parts, chapters, documents, front, dictionary, about, chapterCount: chapters.length };
 }
 
 let cached: ReturnType<typeof loadBookUncached> | null = null;

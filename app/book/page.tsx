@@ -1,3 +1,5 @@
+/* Part covers are already web-sized JPEGs. */
+/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BookSearch } from "../../components/BookSearch";
@@ -6,36 +8,45 @@ import { loadBook } from "../../lib/book-load";
 
 export const metadata: Metadata = {
   title: "The book",
-  description: "Chapters from The Ultimate Crochet Bible, read on Crochet Chaos.",
+  description: "All 15 parts and 84 chapters of The Ultimate Crochet Bible, plus the front matter and abbreviation dictionary.",
 };
 
 export default function BookPage() {
-  const { parts, chapters } = loadBook();
-  const published = chapters.length;
+  const book = loadBook();
   return (
     <div>
       <PhotoBanner shot="book" priority />
-      <p className="eyebrow">The Ultimate Crochet Bible</p>
-      <h1>Read a chapter.</h1>
+      <p className="eyebrow">Tiffany Brooke · The Ultimate Crochet Bible</p>
+      <h1>Fifteen parts. Eighty-four chapters.</h1>
       <p className="lede">
-        {published} {published === 1 ? "chapter is" : "chapters are"} in the site so far. The rest of the manuscript is added as Markdown files in <code>content/book</code>. The stitch dictionary is separate and already complete.
+        The reader has the front matter, the abbreviation dictionary, {book.parts.length} parts, and {book.chapterCount} chapters, in the manuscript’s order. US terms are used, with UK names beside them. The front matter says what in this working copy has and has not been test-crocheted.
       </p>
-      <BookSearch chapters={chapters.map((chapter) => ({ slug: chapter.slug, title: chapter.title, partTitle: chapter.partTitle, summary: chapter.summary, plainText: chapter.plainText }))} />
-      {parts.map((part) => (
-        <section key={part.slug} className="panel">
-          <h2>{part.title}</h2>
-          {part.chapters.length === 0 ? (
-            <p className="muted">No chapters in this part yet.</p>
-          ) : (
-            <ul>
-              {part.chapters.map((chapter) => (
-                <li key={chapter.slug}>
-                  <Link href={`/book/${chapter.slug}`}>{chapter.title}</Link>
-                  {chapter.summary && <p className="muted">{chapter.summary}</p>}
-                </li>
-              ))}
-            </ul>
-          )}
+      <BookSearch />
+      <section className="panel">
+        <h2>Openers</h2>
+        <ul>
+          <li><Link href={`/book/${book.front.slug}`}>{book.front.title}</Link></li>
+          <li><Link href={`/book/${book.dictionary.slug}`}>{book.dictionary.title}</Link></li>
+        </ul>
+      </section>
+      {book.parts.map((part) => (
+        <section className="panel book-part" key={part.slug} style={{ borderColor: part.color }}>
+          <div className="book-part-head">
+            <img src={part.cover} alt={`Cover illustration for Part ${part.number}, ${part.title}`} />
+            <div>
+              <p className="eyebrow">Part {part.number}</p>
+              <h2>{part.title}</h2>
+              <p>{part.intro.summary}</p>
+              <p><Link href={`/book/${part.intro.slug}`}>Read the part introduction</Link></p>
+            </div>
+          </div>
+          <ol className="book-contents">
+            {part.chapters.map((chapter) => (
+              <li key={chapter.slug}>
+                <Link href={`/book/${chapter.slug}`}>{chapter.chapterNumber}. {chapter.title}</Link>
+              </li>
+            ))}
+          </ol>
         </section>
       ))}
     </div>

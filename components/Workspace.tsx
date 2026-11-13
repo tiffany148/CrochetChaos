@@ -27,6 +27,7 @@ export function Workspace() {
   const [categoryFilter, setCategoryFilter] = useState("All");
   const [backupRaw, setBackupRaw] = useState<string | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
+  const [productsReady, setProductsReady] = useState(false);
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [chatBusy, setChatBusy] = useState(false);
@@ -46,7 +47,8 @@ export function Workspace() {
       .then((data) => {
         if (Array.isArray(data)) setProducts(data);
       })
-      .catch(() => setProducts([]));
+      .catch(() => setProducts([]))
+      .finally(() => setProductsReady(true));
   }, []);
 
   useEffect(() => {
@@ -298,6 +300,7 @@ export function Workspace() {
         <section className="panel">
           <h2>Tools and supplies</h2>
           <p className="muted">Sample listings for planning only. This is not a shop or a checkout.</p>
+          {productsReady && !products.length && <p>The sample list did not load. The planners and the book are still available.</p>}
           <div className="product-grid">
             {products.map((product) => (
               <article className="product-card" key={product.id}>

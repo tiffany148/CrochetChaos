@@ -488,16 +488,37 @@ caption { text-align: left; padding: 0.8rem; font-weight: 800; }
 .bible-view-tabs button.active, .bible-actions button[aria-pressed="true"] { background: var(--lime); border-color: transparent; font-weight: 800; }
 
 .round-list { margin: 0.4rem 0 0; padding-left: 1.2rem; }
+.book-body { min-width: 0; }
 .book-body h2 { margin-top: 1.4rem; }
+.book-body h4 { font-family: Nunito, sans-serif; font-size: 1.15rem; margin: 1rem 0 0.35rem; }
+.book-body code { font-family: ui-monospace, monospace; font-size: 0.92em; }
+.book-quote { margin: 1rem 0; padding: 0.2rem 0 0.2rem 1rem; border-left: 6px solid #3ef0df; }
+.book-figure { margin: 1rem 0; }
+.book-figure img { display: block; width: min(100%, 720px); height: auto; border-radius: 18px; }
+.book-figure.symbol img { width: 84px; background: #fffdfb; padding: 0.45rem; border-radius: 12px; }
+.book-table { background: var(--surface); color: var(--ink); border-radius: 18px; }
+.book-part-head { display: grid; grid-template-columns: 200px 1fr; gap: 1rem; align-items: center; margin-bottom: 0.8rem; }
+.book-part-head img { width: 100%; height: auto; border-radius: 18px; }
+.book-contents { margin: 0.4rem 0 0; padding-left: 1.3rem; }
+.book-contents li { margin: 0.28rem 0; }
+.chapter-nav .secondary { white-space: normal; text-align: center; }
 .tip { border-radius: 20px; padding: 1rem 1.15rem; margin: 1rem 0; border: 2px solid; }
-.tip strong { display: block; font-family: "Lobster Two", cursive; font-size: 1.45rem; margin-bottom: 0.35rem; background: none; -webkit-text-fill-color: currentColor; filter: none; animation: none; }
+.tip strong { display: flex; align-items: center; gap: 0.7rem; font-family: "Lobster Two", cursive; font-size: 1.45rem; line-height: 1.2; margin-bottom: 0.45rem; background: none; -webkit-text-fill-color: currentColor; filter: none; animation: none; }
+.tip strong img { width: 48px; height: 48px; object-fit: contain; flex: none; border-radius: 10px; }
 .tip p { margin: 0; }
+.tip p + p { margin-top: 0.65rem; }
 .tip-wisdom { background: #2a1848; border-color: #d4c2ff; color: #fff8ef; }
 .tip-dang { background: #243014; border-color: #d6f25c; color: #fff8ef; }
 .tip-fix { background: #3a1024; border-color: #ff8ad4; color: #fff8ef; }
+.tip-hint { background: #08343a; border-color: #7af0e4; color: #fff8ef; }
+.tip-safety { background: #3a1018; border-color: #ffb4c8; color: #fff8ef; }
+.tip-pattern { background: #241038; border-color: #e4d4ff; color: #fff8ef; }
+.tip-status { background: #1a2438; border-color: #d6f25c; color: #fff8ef; }
+.tip-try { background: #1d3014; border-color: #d6f25c; color: #fff8ef; }
 .step-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
 .step-card { background: var(--surface); color: var(--ink); border-radius: 20px; overflow: hidden; border: 2px solid #3ef0df; box-shadow: 0 0 16px rgb(62 240 223 / 30%); }
-.step-photo { position: relative; aspect-ratio: 4 / 3; }
+.step-photo { position: relative; background: #14081f; }
+.step-photo img { display: block; width: 100%; height: auto; }
 .step-num { position: absolute; z-index: 1; top: 0.6rem; left: 0.6rem; min-width: 2.2rem; height: 2.2rem; display: grid; place-items: center; border-radius: 999px; background: #d6f25c; color: #2a1238; font-weight: 800; box-shadow: 0 0 12px #d6f25c; }
 .step-copy { padding: 0.8rem 1rem 1rem; }
 .checkpoint { font-weight: 800; color: #9d0058; }
@@ -527,7 +548,8 @@ html[data-theme="dark"] .checkpoint { color: #ffd0ea; }
   .site-header { flex-wrap: wrap; align-items: flex-start; }
   .site-nav { width: 100%; justify-content: flex-start; }
   .heading-row, .tracker-head, .pattern-card, .with-portrait { align-items: flex-start; flex-direction: column; }
-  .hero, .step-grid { grid-template-columns: 1fr; }
+  .hero { grid-template-columns: 1fr; }
+  .book-part-head { grid-template-columns: 1fr; }
   h1 { font-size: 2.5rem; }
   .photo-gallery { gap: 0.6rem; }
   .gallery-frame { aspect-ratio: 1 / 1; border-radius: 18px; }
@@ -538,6 +560,7 @@ html[data-theme="dark"] .checkpoint { color: #ffd0ea; }
   .hero { padding: 1.1rem; border-radius: 24px; }
   .site-nav a, .theme-toggle, .anchor-nav a { padding: 0.55rem 0.72rem; }
   .primary, .secondary { white-space: normal; }
+  .step-grid { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -546,7 +569,7 @@ html[data-theme="dark"] .checkpoint { color: #ffd0ea; }
 
 @media print {
   .sparkle-field, .section-divider, .hero-aside, .craft-photo, .craft-frame, .decor-only, .photo-banner, .photo-gallery, .gallery-frame, .card-photo-frame, .frame-glitter, .site-header, .site-footer, .no-print, .skip { display: none !important; }
-  html, body, .page, .panel, .card, .stitch-card, .card-banner, .card-body, .table-wrap, .results p, .hero, .hero-badge, th, td, .pill, .bible-progress {
+  html, body, .page, .panel, .card, .stitch-card, .card-banner, .card-body, .table-wrap, .results p, .hero, .hero-badge, th, td, .pill, .bible-progress, .tip, .step-card, .book-quote {
     background: white !important;
     background-image: none !important;
     color: black !important;

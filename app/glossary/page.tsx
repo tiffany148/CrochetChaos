@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PhotoBanner } from "../../components/CraftPhoto";
 import { GlossaryBrowser } from "../../components/GlossaryBrowser";
 
 export const metadata: Metadata = {
@@ -7,5 +8,10 @@ export const metadata: Metadata = {
 };
 
 export default function GlossaryPage() {
-  return <GlossaryBrowser />;
+  return (
+    <>
+      <PhotoBanner shot="hooks" priority />
+      <GlossaryBrowser />
+    </>
+  );
 }

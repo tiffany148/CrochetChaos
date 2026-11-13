@@ -16,7 +16,6 @@ import {
   yarnForRectangle,
 } from "../lib/calculators";
 import { CROCHET_HOOKS, HOOK_SOURCE, hooksMatching } from "../lib/hooks";
-import { CraftPhoto, yarnAlt } from "./CraftPhoto";
 import { matchTerms, sizeCharts, sizeChartGroups } from "../lib/stitches";
 
 function numberValue(value: string): number {
@@ -79,13 +78,8 @@ export function Calculators() {
 
   return (
     <div>
-      <div className="with-portrait">
-        <CraftPhoto shot="yarn" alt={yarnAlt} className="portrait-sm" sizes="112px" />
-        <div>
-          <p className="eyebrow">Planning math</p>
-          <h1>Calculators that show their work.</h1>
-        </div>
-      </div>
+      <p className="eyebrow">Planning math</p>
+      <h1>Calculators that show their work.</h1>
       <p className="lede">Estimates for crochet, not knitting. A swatch in your stitch, yarn, and hook is still the check that matters.</p>
       <nav className="anchor-nav" aria-label="Calculators">
         <a href="#yarn">Yarn</a>

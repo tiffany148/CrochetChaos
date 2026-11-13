@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PhotoBanner } from "../../components/CraftPhoto";
 import { Workspace } from "../../components/Workspace";
 
 export const metadata: Metadata = {
@@ -7,5 +8,10 @@ export const metadata: Metadata = {
 };
 
 export default function WorkspacePage() {
-  return <Workspace />;
+  return (
+    <>
+      <PhotoBanner shot="basket" priority />
+      <Workspace />
+    </>
+  );
 }

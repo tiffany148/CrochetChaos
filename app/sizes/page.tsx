@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { PhotoBanner } from "../../components/CraftPhoto";
 import { sizeCharts, sizeChartGroups } from "../../lib/stitches";
 
 export const metadata: Metadata = {
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
 export default function SizesPage() {
   return (
     <div>
+      <PhotoBanner shot="swatches" priority />
       <p className="eyebrow">Reference</p>
       <h1>Body measurements and ease</h1>
       <p className="lede">{sizeCharts.source}. Measurements are inches. Use them with the garment calculator and your own gauge swatch.</p>

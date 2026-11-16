@@ -1,16 +1,869 @@
 {
-  "parts": [
-    { "slug": "welcome", "title": "Part One — Welcome to Crochet", "chapters": ["how-this-companion-is-organized"] },
-    { "slug": "first-stitches", "title": "Part Two — Your First Stitches", "chapters": [] },
-    { "slug": "reading", "title": "Part Three — Reading Crochet", "chapters": [] },
-    { "slug": "dictionary", "title": "Part Four — The Complete Stitch Dictionary", "chapters": [] },
-    { "slug": "techniques", "title": "Part Five — Techniques That Change Everything", "chapters": [] },
-    { "slug": "sos", "title": "Part Six — Crochet SOS", "chapters": [] },
-    { "slug": "fit", "title": "Part Seven — The Perfect Fit", "chapters": [] },
-    { "slug": "pets", "title": "Part Eight — Crochet for Pets", "chapters": [] },
-    { "slug": "amigurumi", "title": "Part Nine — Amigurumi and Sculptural Crochet", "chapters": [] },
-    { "slug": "advanced", "title": "Part Ten — Advanced Crochet Mastery", "chapters": [] },
-    { "slug": "patterns", "title": "Part Eleven — Create Your Own Patterns", "chapters": [] },
-    { "slug": "reference", "title": "Part Twelve — The Crocheter’s Reference Library", "chapters": [] }
-  ]
+ "parts": [
+  {
+   "n": 1,
+   "title": "Welcome to Crochet",
+   "color": "#E91E63",
+   "cover": "assets/art/covers/part01.jpg"
+  },
+  {
+   "n": 2,
+   "title": "Your First Stitches",
+   "color": "#00ACC1",
+   "cover": "assets/art/covers/part02.jpg"
+  },
+  {
+   "n": 3,
+   "title": "Reading Crochet",
+   "color": "#FB8C00",
+   "cover": "assets/art/covers/part03.jpg"
+  },
+  {
+   "n": 4,
+   "title": "Complete Stitch Dictionary",
+   "color": "#8E24AA",
+   "cover": "assets/art/covers/part04.jpg"
+  },
+  {
+   "n": 5,
+   "title": "Techniques That Change Everything",
+   "color": "#1E88E5",
+   "cover": "assets/art/covers/part05.jpg"
+  },
+  {
+   "n": 6,
+   "title": "Crochet SOS",
+   "color": "#FF7043",
+   "cover": "assets/art/covers/part06.jpg"
+  },
+  {
+   "n": 7,
+   "title": "The Perfect Fit",
+   "color": "#7CB342",
+   "cover": "assets/art/covers/part07.jpg"
+  },
+  {
+   "n": 8,
+   "title": "Crochet for Pets",
+   "color": "#F4511E",
+   "cover": "assets/art/covers/part08.jpg"
+  },
+  {
+   "n": 9,
+   "title": "Amigurumi & Sculptural Crochet",
+   "color": "#D81B60",
+   "cover": "assets/art/covers/part09.jpg"
+  },
+  {
+   "n": 10,
+   "title": "Advanced Crochet Mastery",
+   "color": "#5E35B1",
+   "cover": "assets/art/covers/part10.jpg"
+  },
+  {
+   "n": 11,
+   "title": "Blocking & Care",
+   "color": "#26A69A",
+   "cover": "assets/art/covers/part11.jpg"
+  },
+  {
+   "n": 12,
+   "title": "Crochet Mathematics & Calculators",
+   "color": "#F9A825",
+   "cover": "assets/art/covers/part12.jpg"
+  },
+  {
+   "n": 13,
+   "title": "Designing Your Own Patterns",
+   "color": "#00897B",
+   "cover": "assets/art/covers/part13.jpg"
+  },
+  {
+   "n": 14,
+   "title": "Crochet Business & Professional Skills",
+   "color": "#6D4C41",
+   "cover": "assets/art/covers/part14.jpg"
+  },
+  {
+   "n": 15,
+   "title": "The Master Reference Library",
+   "color": "#3949AB",
+   "cover": "assets/art/covers/part15.jpg"
+  }
+ ],
+ "chapters": [
+  {
+   "part": 1,
+   "part_title": "Welcome to Crochet",
+   "chapter": 1,
+   "title": "How crochet works",
+   "file": "chapters/part-01-welcome-to-crochet/ch01-how-crochet-works.md",
+   "source": "source chapter 1 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 1,
+   "part_title": "Welcome to Crochet",
+   "chapter": 2,
+   "title": "Tools and hook anatomy",
+   "file": "chapters/part-01-welcome-to-crochet/ch02-tools-and-hook-anatomy.md",
+   "source": "source chapter 2 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 1,
+   "part_title": "Welcome to Crochet",
+   "chapter": 3,
+   "title": "Fiber families and behavior",
+   "file": "chapters/part-01-welcome-to-crochet/ch03-fiber-families-and-behavior.md",
+   "source": "source chapter 5 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 1,
+   "part_title": "Welcome to Crochet",
+   "chapter": 4,
+   "title": "Fiber Profiles: How Each Yarn Behaves",
+   "file": "chapters/part-01-welcome-to-crochet/ch04-fiber-profiles-how-each-yarn-behaves.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 1,
+   "part_title": "Welcome to Crochet",
+   "chapter": 5,
+   "title": "Weight, ply, twist and texture",
+   "file": "chapters/part-01-welcome-to-crochet/ch05-weight-ply-twist-and-texture.md",
+   "source": "source chapter 6 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 1,
+   "part_title": "Welcome to Crochet",
+   "chapter": 6,
+   "title": "Yarn substitution and yardage",
+   "file": "chapters/part-01-welcome-to-crochet/ch06-yarn-substitution-and-yardage.md",
+   "source": "source chapter 7 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 1,
+   "part_title": "Welcome to Crochet",
+   "chapter": 7,
+   "title": "Tips and Tricks Every Crocheter Should Know",
+   "file": "chapters/part-01-welcome-to-crochet/ch07-tips-and-tricks-every-crocheter-should-know.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 2,
+   "part_title": "Your First Stitches",
+   "chapter": 8,
+   "title": "Start Here: Your First Week of Crochet",
+   "file": "chapters/part-02-your-first-stitches/ch08-start-here-your-first-week-of-crochet.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 2,
+   "part_title": "Your First Stitches",
+   "chapter": 9,
+   "title": "Grip, tension and first stitches",
+   "file": "chapters/part-02-your-first-stitches/ch09-grip-tension-and-first-stitches.md",
+   "source": "source chapter 3 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 2,
+   "part_title": "Your First Stitches",
+   "chapter": 10,
+   "title": "Rows, rounds and stitch markers",
+   "file": "chapters/part-02-your-first-stitches/ch10-rows-rounds-and-stitch-markers.md",
+   "source": "source chapter 4 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 2,
+   "part_title": "Your First Stitches",
+   "chapter": 11,
+   "title": "Joining Yarn, Changing Colors, Knots and Loops",
+   "file": "chapters/part-02-your-first-stitches/ch11-joining-yarn-changing-colors-knots-and-loops.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 2,
+   "part_title": "Your First Stitches",
+   "chapter": 12,
+   "title": "Left-Handed Crochet",
+   "file": "chapters/part-02-your-first-stitches/ch12-left-handed-crochet.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 3,
+   "part_title": "Reading Crochet",
+   "chapter": 13,
+   "title": "Pattern language and symbols",
+   "file": "chapters/part-03-reading-crochet/ch13-pattern-language-and-symbols.md",
+   "source": "source chapter 13 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 3,
+   "part_title": "Reading Crochet",
+   "chapter": 14,
+   "title": "Reading charts",
+   "file": "chapters/part-03-reading-crochet/ch14-reading-charts.md",
+   "source": "source chapter 14 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 3,
+   "part_title": "Reading Crochet",
+   "chapter": 15,
+   "title": "Pattern Reading: Worked Examples",
+   "file": "chapters/part-03-reading-crochet/ch15-pattern-reading-worked-examples.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 3,
+   "part_title": "Reading Crochet",
+   "chapter": 16,
+   "title": "Gauge that actually works",
+   "file": "chapters/part-03-reading-crochet/ch16-gauge-that-actually-works.md",
+   "source": "source chapter 17 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 3,
+   "part_title": "Reading Crochet",
+   "chapter": 17,
+   "title": "Adapting a pattern",
+   "file": "chapters/part-03-reading-crochet/ch17-adapting-a-pattern.md",
+   "source": "source chapter 15 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 4,
+   "part_title": "Complete Stitch Dictionary",
+   "chapter": 18,
+   "title": "Core stitch dictionary",
+   "file": "chapters/part-04-complete-stitch-dictionary/ch18-core-stitch-dictionary.md",
+   "source": "source chapter 9 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 4,
+   "part_title": "Complete Stitch Dictionary",
+   "chapter": 19,
+   "title": "Texture through placement",
+   "file": "chapters/part-04-complete-stitch-dictionary/ch19-texture-through-placement.md",
+   "source": "source chapter 10 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 4,
+   "part_title": "Complete Stitch Dictionary",
+   "chapter": 20,
+   "title": "Clusters, shells, bobbles and popcorns",
+   "file": "chapters/part-04-complete-stitch-dictionary/ch20-clusters-shells-bobbles-and-popcorns.md",
+   "source": "source chapter 11 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 4,
+   "part_title": "Complete Stitch Dictionary",
+   "chapter": 21,
+   "title": "Lace, mesh and colorwork",
+   "file": "chapters/part-04-complete-stitch-dictionary/ch21-lace-mesh-and-colorwork.md",
+   "source": "source chapter 12 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 4,
+   "part_title": "Complete Stitch Dictionary",
+   "chapter": 22,
+   "title": "The A\u2013Z Stitch Encyclopedia",
+   "file": "chapters/part-04-complete-stitch-dictionary/ch22-the-a-z-stitch-encyclopedia.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 4,
+   "part_title": "Complete Stitch Dictionary",
+   "chapter": 23,
+   "title": "Stitch Pattern Library",
+   "file": "chapters/part-04-complete-stitch-dictionary/ch23-stitch-pattern-library.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 5,
+   "part_title": "Techniques That Change Everything",
+   "chapter": 24,
+   "title": "Working flat, in the round and in motifs",
+   "file": "chapters/part-05-techniques-that-change-everything/ch24-working-flat-in-the-round-and-in-motifs.md",
+   "source": "source chapter 21 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 5,
+   "part_title": "Techniques That Change Everything",
+   "chapter": 25,
+   "title": "Increases and decreases",
+   "file": "chapters/part-05-techniques-that-change-everything/ch25-increases-and-decreases.md",
+   "source": "source chapter 19 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 5,
+   "part_title": "Techniques That Change Everything",
+   "chapter": 26,
+   "title": "Finishing edges and closures",
+   "file": "chapters/part-05-techniques-that-change-everything/ch26-finishing-edges-and-closures.md",
+   "source": "source chapter 24 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 5,
+   "part_title": "Techniques That Change Everything",
+   "chapter": 27,
+   "title": "Granny squares and motifs",
+   "file": "chapters/part-05-techniques-that-change-everything/ch27-granny-squares-and-motifs.md",
+   "source": "source chapter 37 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 5,
+   "part_title": "Techniques That Change Everything",
+   "chapter": 28,
+   "title": "Planning Granny Square Placement",
+   "file": "chapters/part-05-techniques-that-change-everything/ch28-planning-granny-square-placement.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 5,
+   "part_title": "Techniques That Change Everything",
+   "chapter": 29,
+   "title": "Motif Library: Squares, Hexagons, Triangles and Circles",
+   "file": "chapters/part-05-techniques-that-change-everything/ch29-motif-library-squares-hexagons-triangles-and-cir.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 5,
+   "part_title": "Techniques That Change Everything",
+   "chapter": 30,
+   "title": "Guided Project: Your First Granny Square Blanket",
+   "file": "chapters/part-05-techniques-that-change-everything/ch30-guided-project-your-first-granny-square-blanket.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 5,
+   "part_title": "Techniques That Change Everything",
+   "chapter": 31,
+   "title": "Borders and Edgings Library",
+   "file": "chapters/part-05-techniques-that-change-everything/ch31-borders-and-edgings-library.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 5,
+   "part_title": "Techniques That Change Everything",
+   "chapter": 32,
+   "title": "Color Planning for Crocheters",
+   "file": "chapters/part-05-techniques-that-change-everything/ch32-color-planning-for-crocheters.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 6,
+   "part_title": "Crochet SOS",
+   "chapter": 33,
+   "title": "Crochet SOS Symptom Finder",
+   "file": "chapters/part-06-crochet-sos/ch33-crochet-sos-symptom-finder.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 6,
+   "part_title": "Crochet SOS",
+   "chapter": 34,
+   "title": "Reading mistakes",
+   "file": "chapters/part-06-crochet-sos/ch34-reading-mistakes.md",
+   "source": "source chapter 41 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 6,
+   "part_title": "Crochet SOS",
+   "chapter": 35,
+   "title": "Frogging without losing everything",
+   "file": "chapters/part-06-crochet-sos/ch35-frogging-without-losing-everything.md",
+   "source": "source chapter 42 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 6,
+   "part_title": "Crochet SOS",
+   "chapter": 36,
+   "title": "Dropped loops, holes and tension changes",
+   "file": "chapters/part-06-crochet-sos/ch36-dropped-loops-holes-and-tension-changes.md",
+   "source": "source chapter 43 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 7,
+   "part_title": "The Perfect Fit",
+   "chapter": 37,
+   "title": "Measure before you stitch",
+   "file": "chapters/part-07-the-perfect-fit/ch37-measure-before-you-stitch.md",
+   "source": "source chapter 25 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 7,
+   "part_title": "The Perfect Fit",
+   "chapter": 38,
+   "title": "Standard Body Size Charts",
+   "file": "chapters/part-07-the-perfect-fit/ch38-standard-body-size-charts.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 7,
+   "part_title": "The Perfect Fit",
+   "chapter": 39,
+   "title": "Sizing calculations",
+   "file": "chapters/part-07-the-perfect-fit/ch39-sizing-calculations.md",
+   "source": "source chapter 18 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 7,
+   "part_title": "The Perfect Fit",
+   "chapter": 40,
+   "title": "Sweaters, cardigans and tops",
+   "file": "chapters/part-07-the-perfect-fit/ch40-sweaters-cardigans-and-tops.md",
+   "source": "source chapter 26 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 7,
+   "part_title": "The Perfect Fit",
+   "chapter": 41,
+   "title": "Necklines, sleeves and openings",
+   "file": "chapters/part-07-the-perfect-fit/ch41-necklines-sleeves-and-openings.md",
+   "source": "source chapter 23 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 7,
+   "part_title": "The Perfect Fit",
+   "chapter": 42,
+   "title": "Hats, socks and accessories",
+   "file": "chapters/part-07-the-perfect-fit/ch42-hats-socks-and-accessories.md",
+   "source": "source chapter 27 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 7,
+   "part_title": "The Perfect Fit",
+   "chapter": 43,
+   "title": "Hats in the Round: Sizing, Crowns and Brims",
+   "file": "chapters/part-07-the-perfect-fit/ch43-hats-in-the-round-sizing-crowns-and-brims.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 7,
+   "part_title": "The Perfect Fit",
+   "chapter": 44,
+   "title": "Hat Planning Tables",
+   "file": "chapters/part-07-the-perfect-fit/ch44-hat-planning-tables.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 7,
+   "part_title": "The Perfect Fit",
+   "chapter": 45,
+   "title": "Buttons, Zippers, Linings and Straps",
+   "file": "chapters/part-07-the-perfect-fit/ch45-buttons-zippers-linings-and-straps.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 7,
+   "part_title": "The Perfect Fit",
+   "chapter": 46,
+   "title": "Adjustments and alterations",
+   "file": "chapters/part-07-the-perfect-fit/ch46-adjustments-and-alterations.md",
+   "source": "source chapter 28 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 8,
+   "part_title": "Crochet for Pets",
+   "chapter": 47,
+   "title": "Safety and comfort first",
+   "file": "chapters/part-08-crochet-for-pets/ch47-safety-and-comfort-first.md",
+   "source": "source chapter 29 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 8,
+   "part_title": "Crochet for Pets",
+   "chapter": 48,
+   "title": "Measuring a dog",
+   "file": "chapters/part-08-crochet-for-pets/ch48-measuring-a-dog.md",
+   "source": "source chapter 30 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 8,
+   "part_title": "Crochet for Pets",
+   "chapter": 49,
+   "title": "Dog sweaters and hoodies",
+   "file": "chapters/part-08-crochet-for-pets/ch49-dog-sweaters-and-hoodies.md",
+   "source": "source chapter 31 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 8,
+   "part_title": "Crochet for Pets",
+   "chapter": 50,
+   "title": "Custom harness-friendly designs",
+   "file": "chapters/part-08-crochet-for-pets/ch50-custom-harness-friendly-designs.md",
+   "source": "source chapter 32 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 9,
+   "part_title": "Amigurumi & Sculptural Crochet",
+   "chapter": 51,
+   "title": "Magic rings and alternatives",
+   "file": "chapters/part-09-amigurumi-sculptural-crochet/ch51-magic-rings-and-alternatives.md",
+   "source": "source chapter 33 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 9,
+   "part_title": "Amigurumi & Sculptural Crochet",
+   "chapter": 52,
+   "title": "Shaping and stuffing",
+   "file": "chapters/part-09-amigurumi-sculptural-crochet/ch52-shaping-and-stuffing.md",
+   "source": "source chapter 34 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 9,
+   "part_title": "Amigurumi & Sculptural Crochet",
+   "chapter": 53,
+   "title": "Assembly and facial features",
+   "file": "chapters/part-09-amigurumi-sculptural-crochet/ch53-assembly-and-facial-features.md",
+   "source": "source chapter 35 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 9,
+   "part_title": "Amigurumi & Sculptural Crochet",
+   "chapter": 54,
+   "title": "Designing 3D forms",
+   "file": "chapters/part-09-amigurumi-sculptural-crochet/ch54-designing-3d-forms.md",
+   "source": "source chapter 36 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 9,
+   "part_title": "Amigurumi & Sculptural Crochet",
+   "chapter": 55,
+   "title": "Amigurumi Shape Tables",
+   "file": "chapters/part-09-amigurumi-sculptural-crochet/ch55-amigurumi-shape-tables.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 10,
+   "part_title": "Advanced Crochet Mastery",
+   "chapter": 56,
+   "title": "Lace, filet and doilies",
+   "file": "chapters/part-10-advanced-crochet-mastery/ch56-lace-filet-and-doilies.md",
+   "source": "source chapter 38 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 10,
+   "part_title": "Advanced Crochet Mastery",
+   "chapter": 57,
+   "title": "Tunisian and specialty methods",
+   "file": "chapters/part-10-advanced-crochet-mastery/ch57-tunisian-and-specialty-methods.md",
+   "source": "source chapter 39 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 10,
+   "part_title": "Advanced Crochet Mastery",
+   "chapter": 58,
+   "title": "Tapestry Crochet Masterclass",
+   "file": "chapters/part-10-advanced-crochet-mastery/ch58-tapestry-crochet-masterclass.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 10,
+   "part_title": "Advanced Crochet Mastery",
+   "chapter": 59,
+   "title": "Tapestry, C2C and Filet Chart Library",
+   "file": "chapters/part-10-advanced-crochet-mastery/ch59-tapestry-c2c-and-filet-chart-library.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 10,
+   "part_title": "Advanced Crochet Mastery",
+   "chapter": 60,
+   "title": "Color planning and embellishment",
+   "file": "chapters/part-10-advanced-crochet-mastery/ch60-color-planning-and-embellishment.md",
+   "source": "source chapter 40 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 10,
+   "part_title": "Advanced Crochet Mastery",
+   "chapter": 61,
+   "title": "More Specialty Methods: C2C, Mosaic, Bruges, Irish and Freeform",
+   "file": "chapters/part-10-advanced-crochet-mastery/ch61-more-specialty-methods-c2c-mosaic-bruges-irish-a.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 11,
+   "part_title": "Blocking & Care",
+   "chapter": 62,
+   "title": "Seams and joining",
+   "file": "chapters/part-11-blocking-care/ch62-seams-and-joining.md",
+   "source": "source chapter 22 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 11,
+   "part_title": "Blocking & Care",
+   "chapter": 63,
+   "title": "Blocking, washing and mending",
+   "file": "chapters/part-11-blocking-care/ch63-blocking-washing-and-mending.md",
+   "source": "source chapter 44 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 11,
+   "part_title": "Blocking & Care",
+   "chapter": 64,
+   "title": "Weaving In Ends, Washing, Storage and Restoration",
+   "file": "chapters/part-11-blocking-care/ch64-weaving-in-ends-washing-storage-and-restoration.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 11,
+   "part_title": "Blocking & Care",
+   "chapter": 65,
+   "title": "Care, storage and sustainability",
+   "file": "chapters/part-11-blocking-care/ch65-care-storage-and-sustainability.md",
+   "source": "source chapter 8 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 12,
+   "part_title": "Crochet Mathematics & Calculators",
+   "chapter": 66,
+   "title": "Crochet Formulas: Gauge, Multiples, Increases and Circles",
+   "file": "chapters/part-12-crochet-mathematics-calculators/ch66-crochet-formulas-gauge-multiples-increases-and-c.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 12,
+   "part_title": "Crochet Mathematics & Calculators",
+   "chapter": 67,
+   "title": "Ready-Reckoner Tables",
+   "file": "chapters/part-12-crochet-mathematics-calculators/ch67-ready-reckoner-tables.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 12,
+   "part_title": "Crochet Mathematics & Calculators",
+   "chapter": 68,
+   "title": "Estimating materials and cost",
+   "file": "chapters/part-12-crochet-mathematics-calculators/ch68-estimating-materials-and-cost.md",
+   "source": "source chapter 20 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 12,
+   "part_title": "Crochet Mathematics & Calculators",
+   "chapter": 69,
+   "title": "Yarn Math: Estimating How Much You Need",
+   "file": "chapters/part-12-crochet-mathematics-calculators/ch69-yarn-math-estimating-how-much-you-need.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 13,
+   "part_title": "Designing Your Own Patterns",
+   "chapter": 70,
+   "title": "Design from a sketch",
+   "file": "chapters/part-13-designing-your-own-patterns/ch70-design-from-a-sketch.md",
+   "source": "source chapter 45 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 13,
+   "part_title": "Designing Your Own Patterns",
+   "chapter": 71,
+   "title": "Writing a reproducible pattern",
+   "file": "chapters/part-13-designing-your-own-patterns/ch71-writing-a-reproducible-pattern.md",
+   "source": "source chapter 16 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 13,
+   "part_title": "Designing Your Own Patterns",
+   "chapter": 72,
+   "title": "Grading sizes",
+   "file": "chapters/part-13-designing-your-own-patterns/ch72-grading-sizes.md",
+   "source": "source chapter 46 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 13,
+   "part_title": "Designing Your Own Patterns",
+   "chapter": 73,
+   "title": "Technical editing and pattern testing",
+   "file": "chapters/part-13-designing-your-own-patterns/ch73-technical-editing-and-pattern-testing.md",
+   "source": "source chapter 47 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 13,
+   "part_title": "Designing Your Own Patterns",
+   "chapter": 74,
+   "title": "Building a personal stitch library",
+   "file": "chapters/part-13-designing-your-own-patterns/ch74-building-a-personal-stitch-library.md",
+   "source": "source chapter 48 of the 177-page draft",
+   "status": "source text + edition expansion"
+  },
+  {
+   "part": 13,
+   "part_title": "Designing Your Own Patterns",
+   "chapter": 75,
+   "title": "Original Pattern Portfolio",
+   "file": "chapters/part-13-designing-your-own-patterns/ch75-original-pattern-portfolio.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 13,
+   "part_title": "Designing Your Own Patterns",
+   "chapter": 76,
+   "title": "Pattern Portfolio II: Toys, Pets, Tunisian and Colorwork",
+   "file": "chapters/part-13-designing-your-own-patterns/ch76-pattern-portfolio-ii-toys-pets-tunisian-and-colo.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 13,
+   "part_title": "Designing Your Own Patterns",
+   "chapter": 77,
+   "title": "Pattern Portfolio III: Home, Bags and Quick Wearables",
+   "file": "chapters/part-13-designing-your-own-patterns/ch77-pattern-portfolio-iii-home-bags-and-quick-wearab.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 14,
+   "part_title": "Crochet Business & Professional Skills",
+   "chapter": 78,
+   "title": "Pricing, Selling and Photographing Your Crochet",
+   "file": "chapters/part-14-crochet-business-professional-skills/ch78-pricing-selling-and-photographing-your-crochet.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 14,
+   "part_title": "Crochet Business & Professional Skills",
+   "chapter": 79,
+   "title": "Copyright, Licensing, Teaching and Digital Patterns",
+   "file": "chapters/part-14-crochet-business-professional-skills/ch79-copyright-licensing-teaching-and-digital-pattern.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 15,
+   "part_title": "The Master Reference Library",
+   "chapter": 80,
+   "title": "Hook and Yarn Reference Charts",
+   "file": "chapters/part-15-the-master-reference-library/ch80-hook-and-yarn-reference-charts.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 15,
+   "part_title": "The Master Reference Library",
+   "chapter": 81,
+   "title": "Abbreviations, Symbols and US/UK Terms",
+   "file": "chapters/part-15-the-master-reference-library/ch81-abbreviations-symbols-and-us-uk-terms.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 15,
+   "part_title": "The Master Reference Library",
+   "chapter": 82,
+   "title": "Reference tables and fabric studies",
+   "file": "chapters/part-15-the-master-reference-library/ch82-reference-tables-and-fabric-studies.md",
+   "source": "source back matter",
+   "status": "source text (expansion pending)"
+  },
+  {
+   "part": 15,
+   "part_title": "The Master Reference Library",
+   "chapter": 83,
+   "title": "Glossary",
+   "file": "chapters/part-15-the-master-reference-library/ch83-glossary.md",
+   "source": "new for this edition",
+   "status": "new"
+  },
+  {
+   "part": 15,
+   "part_title": "The Master Reference Library",
+   "chapter": 84,
+   "title": "Research references",
+   "file": "chapters/part-15-the-master-reference-library/ch84-research-references.md",
+   "source": "source back matter",
+   "status": "source text (expansion pending)"
+  }
+ ],
+ "front_matter": "chapters/front-matter.md",
+ "badges": {
+  "dang": "assets/art/badges/dang.png",
+  "granny": "assets/art/badges/granny.png",
+  "hint": "assets/art/badges/hint.png",
+  "fix": "assets/art/badges/fix.png"
+ },
+ "section_covers": {
+  "dictionary": "assets/art/covers/dictionary.jpg",
+  "index": "assets/art/covers/index.jpg"
+ },
+ "about_the_author": {
+  "title": "About the Author",
+  "slug": "about-the-author",
+  "file": "chapters/about-the-author.md",
+  "image": "assets/art/about-the-author.jpg"
+ }
 }

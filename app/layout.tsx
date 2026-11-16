@@ -9,10 +9,10 @@ export const metadata: Metadata = {
     default: "Crochet Chaos",
     template: "%s · Crochet Chaos",
   },
-  description: "A colorful companion to The Ultimate Crochet Bible by Tiffany Brooke: 140 stitches, glossary, calculators, book chapters, and a browser project workspace.",
+  description: "A colorful companion to The Ultimate Crochet Bible by Tiffany Stark: 140 stitches, glossary, calculators, book chapters, and a browser project workspace.",
   openGraph: {
     title: "Crochet Chaos",
-    description: "Stitches, calculators, and chapters for The Ultimate Crochet Bible by Tiffany Brooke.",
+    description: "Stitches, calculators, and chapters for The Ultimate Crochet Bible by Tiffany Stark.",
     images: [{ url: "/images/hero.jpg", width: 1280, height: 720, alt: "Yarn, hooks, stitch markers, and granny squares" }],
   },
   twitter: {

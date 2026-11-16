@@ -1,11 +1,13 @@
 "use client";
 
+import { PhotoBanner } from "../../components/CraftPhoto";
 import { CROCHET_HOOKS, HOOK_SOURCE } from "../../lib/hooks";
 import { stitches } from "../../lib/stitches";
 
 export default function ReferencePage() {
   return (
     <div>
+      <PhotoBanner shot="squares" />
       <p className="eyebrow no-print">Printable reference</p>
       <h1>Sheets you can take to the chair.</h1>
       <p className="lede no-print">Abbreviations, hook sizes, and the stitch list. These are filled reference sheets, not blank worksheets.</p>

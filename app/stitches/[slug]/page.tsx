@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { PhotoBanner, shotForCategory } from "../../../components/CraftPhoto";
 import { getStitch, relatedStitches, stitches } from "../../../lib/stitches";
 
 type PageProps = { params: { slug: string } };
@@ -25,6 +26,7 @@ export default function StitchPage({ params }: PageProps) {
 
   return (
     <article className="detail" data-cat={stitch.cat} data-level={stitch.level}>
+      <PhotoBanner shot={shotForCategory(stitch.cat)} priority />
       <p className="eyebrow">{stitch.cat} · {stitch.level}</p>
       <h1>{stitch.name}</h1>
       <div className="meta-row">

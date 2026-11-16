@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PhotoBanner } from "../../../components/CraftPhoto";
 import { DogSweater } from "../../../components/DogSweater";
 
 export const metadata: Metadata = {
@@ -7,5 +8,10 @@ export const metadata: Metadata = {
 };
 
 export default function DogSweaterPage() {
-  return <DogSweater />;
+  return (
+    <>
+      <PhotoBanner shot="cascade" priority />
+      <DogSweater />
+    </>
+  );
 }
